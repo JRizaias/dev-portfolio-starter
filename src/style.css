@@ -1,0 +1,282 @@
+:root {
+  --background: #fffaf0;
+  --sidebar: #fdf6e3;
+  --text: #222222;
+  --accent: #005f73;
+  --accent2: #e15a97;
+  --border: rgba(0,0,0,0.05);
+  --shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
+  --radius: 10px;
+}
+
+/* ✨ Base */
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--accent2);
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+/* 📐 Estrutura Geral */
+#layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ✅ Navbar fixa no topo */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: var(--sidebar);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+/* Botão toggle do sidebar */
+.toggle-sidebar {
+  margin-right: auto;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+/* 📦 Container do sidebar + main */
+.content-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: var(--sidebar);
+  box-shadow: var(--shadow);
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  height: calc(100vh - 64px); /* Ajuste se navbar for maior/menor */
+  position: sticky;
+  top: 64px;
+  z-index: 10;
+}
+
+/* Sidebar oculta */
+.sidebar.hidden {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+}
+
+/* Área principal */
+.main-content {
+  flex: 1;
+  max-width: 100%;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+/* 🧱 Cartões */
+.card {
+  background: var(--sidebar);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-year {
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: bold;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.card p {
+  margin: 0.5rem 0 1rem;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.card-link {
+  align-self: flex-start;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* 🧱 Grid de Projetos */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background: var(--sidebar);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-card h3 {
+  margin: 0.5rem 0;
+  color: var(--accent);
+}
+
+.project-card .buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.5em 1.2em;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent2);
+  background: #fff;
+  color: var(--accent2);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn:hover {
+  background: var(--accent2);
+  color: #fff;
+}
+
+/* 📚 Grid de Artigos */
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.article-card {
+  background: #fdf8f3;
+  border: 1px solid #e2dcd2;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.article-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.article-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-title {
+  font-weight: bold;
+  color: #c44b9a;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.article-title:hover {
+  text-decoration: underline;
+}
+
+.article-desc {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* 🔻 Rodapé */
+footer {
+  text-align: center;
+  color: #888;
+  margin: 3rem 0 0;
+  padding: 1rem;
+  font-size: 0.95em;
+}
+
+/* 📱 Responsividade */
+@media (max-width: 800px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    box-shadow: none;
+    top: auto;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .sidebar.hidden {
+    display: none;
+  }
+}

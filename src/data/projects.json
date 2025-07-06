@@ -1,0 +1,44 @@
+[
+  {
+    "year": "2025",
+    "title": "Gestor de Notas BI",
+    "description": "Ferramenta web para organizar, buscar e compartilhar anotações em projetos de BI.",
+    "article": "#",
+    "demo": "#"
+  },
+  {
+    "year": "2024",
+    "title": "SertãoSoft Dashboard",
+    "description": "Dashboard analítico com integração em tempo real para pequenas empresas.",
+    "article": "#",
+    "demo": "#"
+  },
+  {
+    "year": "2024",
+    "title": "Controle de Estoque IoT",
+    "description": "Sistema de monitoramento de estoque com sensores conectados e alertas automáticos.",
+    "article": "#",
+    "demo": "#"
+  },
+  {
+    "year": "2023",
+    "title": "Simulador Financeiro",
+    "description": "App para simular cenários de investimentos e comparar retornos em diferentes ativos.",
+    "article": "#",
+    "demo": "#"
+  },
+  {
+    "year": "2023",
+    "title": "Checklist de Projetos",
+    "description": "Aplicação para criar e acompanhar checklists colaborativos em equipes remotas.",
+    "article": "#",
+    "demo": "#"
+  },
+  {
+    "year": "2022",
+    "title": "Gerador de Currículo",
+    "description": "Plataforma para gerar currículos bonitos e modernos em PDF a partir de dados simples.",
+    "article": "#",
+    "demo": "#"
+  }
+]

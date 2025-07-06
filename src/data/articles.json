@@ -1,0 +1,74 @@
+[
+  {
+    "title": "An Introduction to GraphQL",
+    "description": "A beginner-friendly guide to GraphQL and its core concepts.",
+    "icon": "🧠",
+    "link": "#"
+  },
+  {
+    "title": "How to Structure and Organize a React Application",
+    "description": "Best practices for organizing large-scale React projects.",
+    "icon": "📂",
+    "link": "#"
+  },
+  {
+    "title": "How to Set Up webpack 5 From Scratch",
+    "description": "Step-by-step guide to configuring Webpack 5 manually.",
+    "icon": "⚙️",
+    "link": "#"
+  },
+  {
+    "title": "The Event Loop, Callbacks, Promises, and Async/Await in JavaScript",
+    "description": "Deep dive into asynchronous JavaScript mechanisms.",
+    "icon": "🌀",
+    "link": "#"
+  },
+  {
+    "title": "How to Use Redux and React",
+    "description": "Integrate Redux in your React apps with clean architecture.",
+    "icon": "🧱",
+    "link": "#"
+  },
+  {
+    "title": "How to Set up a Mac for Development",
+    "description": "Tools and settings to optimize a dev workflow on macOS.",
+    "icon": "🍎",
+    "link": "#"
+  },
+  {
+    "title": "A Complete Guide to CSS Concepts and Fundamentals",
+    "description": "Master layout, selectors, and advanced CSS topics.",
+    "icon": "🎨",
+    "link": "#"
+  },
+  {
+    "title": "How to Use Vue, the JavaScript Framework",
+    "description": "Create interactive interfaces using Vue.",
+    "icon": "🖼️",
+    "link": "#"
+  },
+  {
+    "title": "Everything I Know as a Software Developer Without a Degree",
+    "description": "Insights and experience from a self-taught developer.",
+    "icon": "📚",
+    "link": "#"
+  },
+  {
+    "title": "How to Use React, the JavaScript Framework",
+    "description": "Understand the core of React and component architecture.",
+    "icon": "⚛️",
+    "link": "#"
+  },
+  {
+    "title": "Design for Developers: Specific Steps to Improve Your Website Design",
+    "description": "Practical tips for improving aesthetics and usability.",
+    "icon": "🖌️",
+    "link": "#"
+  },
+  {
+    "title": "How to Use the Command Line in Linux and macOS",
+    "description": "Essential commands and workflows for terminal productivity.",
+    "icon": "💻",
+    "link": "#"
+  }
+]

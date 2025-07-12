@@ -4,16 +4,26 @@ export function createNavBar() {
   nav.className = 'navbar';
 
   const links = [
-    { href: 'index.html', label: '🏠 Notes' },
-    { href: 'blog.html', label: '📖 Blog' },
-    { href: 'projects.html', label: '🛠️ Projects' },
-    { href: 'about.html', label: '👤 About' }
+    { href: 'index.html', icon: '🏠', label: 'Notes' },
+    { href: 'blog.html', icon: '📖', label: 'Blog' },
+    { href: 'projects.html', icon: '🛠️', label: 'Projects' },
+    { href: 'about.html', icon: '👤', label: 'About' }
   ];
 
   links.forEach(link => {
     const a = document.createElement('a');
     a.href = link.href;
-    a.innerHTML = link.label;
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'nav-icon';
+    iconSpan.textContent = link.icon;
+
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'nav-label';
+    labelSpan.textContent = link.label;
+
+    a.appendChild(iconSpan);
+    a.appendChild(labelSpan);
     nav.appendChild(a);
   });
 

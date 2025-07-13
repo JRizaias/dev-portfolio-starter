@@ -2,8 +2,8 @@
   --background: #e7e7e7;
   --sidebar: lab(42.26% -0.6 0.42 / 0.151);
   --text: #222222;
-  --accent: #005f73;
-  --accent2: #e15a97;
+  --accent: #018ca8;
+  --accent2: #ff660096;
   --border: rgba(0,0,0,0.05);
   --shadow: 0 0.125rem 1rem 0 rgba(0,0,0,0.04);
   --radius: 0.625rem;
@@ -53,7 +53,7 @@ h1, h2, h3, h4 {
   gap: 1.5rem;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(250, 250, 250, 0.6);   /* Troque para o tom e alpha desejados */
+  background: lab(42.26% -0.6 0.42 / 0.151);
   border-bottom: 0.0625rem solid #eee;
   box-shadow: 0 0.25rem 0.5rem 0 rgba(0,0,0,0.02);
   -webkit-backdrop-filter: blur(6px);
@@ -150,7 +150,7 @@ h1, h2, h3, h4 {
 
 .card-year {
   font-size: 0.8rem;
-  color: #999;
+  color: #f9f9f9;
   font-weight: bold;
 }
 
@@ -225,7 +225,7 @@ h1, h2, h3, h4 {
 }
 
 .article-card {
-  background: #fdf8f3;
+  background: var(--sidebar);
   border: 1px solid #e2dcd2;
   border-radius: 0.5rem;
   padding: 1rem;
@@ -253,7 +253,7 @@ h1, h2, h3, h4 {
 
 .article-title {
   font-weight: bold;
-  color: #c44b9a;
+  color:#018ca8;
   text-decoration: none;
   font-size: 1rem;
 }

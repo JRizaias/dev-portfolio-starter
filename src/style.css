@@ -87,7 +87,13 @@ h1, h2, h3, h4 {
   display: inline-block;
   vertical-align: middle;
 }
-
+.nav-left,
+.nav-right {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1rem;
+}
 .toggle-sidebar {
   margin-right: auto;
   background: transparent;

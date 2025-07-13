@@ -7,6 +7,10 @@ export function createNavBar() {
   const leftSection = document.createElement('div');
   leftSection.className = 'nav-left';
 
+  // Container esquerdo (links de navegação)
+  const leftSection = document.createElement('div');
+  leftSection.className = 'nav-left';
+
   const links = [
     { href: 'index.html', icon: '🏠', label: 'Notes' },
     { href: 'blog.html', icon: '📖', label: 'Blog' },

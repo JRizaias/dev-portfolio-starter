@@ -1,12 +1,12 @@
 :root {
-  --background: #fffaf0;
-  --sidebar: #fdf6e3;
+  --background: #e7e7e7;
+  --sidebar: lab(42.26% -0.6 0.42 / 0.151);
   --text: #222222;
-  --accent: #005f73;
-  --accent2: #e15a97;
+  --accent: #018ca8;
+  --accent2: #ff660096;
   --border: rgba(0,0,0,0.05);
-  --shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
-  --radius: 10px;
+  --shadow: 0 0.125rem 1rem 0 rgba(0,0,0,0.04);
+  --radius: 0.625rem;
 }
 
 /* ✨ Base */
@@ -16,6 +16,7 @@ body {
   font-family: 'Inter', Arial, sans-serif;
   margin: 0;
   padding: 0;
+  font-size: 1rem;
 }
 
 a {
@@ -33,7 +34,7 @@ h1, h2, h3, h4 {
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   font-weight: bold;
-  letter-spacing: -1px;
+  letter-spacing: -0.0625rem;
 }
 
 /* 📐 Estrutura Geral */
@@ -44,52 +45,55 @@ h1, h2, h3, h4 {
   position: relative;
 }
 
-/* Navbar geral */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fffaf0;
-  border-bottom: 1px solid #ddd;
-  padding: 0.75rem 1.5rem;
-  position: fixed;
-  width: 100%;
+  position: sticky;
   top: 0;
   z-index: 1000;
-  font-family: Arial, sans-serif;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: lab(42.26% -0.6 0.42 / 0.151);
+  border-bottom: 0.0625rem solid #eee;
+  box-shadow: 0 0.25rem 0.5rem 0 rgba(0,0,0,0.02);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
-/* Lado esquerdo: links */
-.nav-left a {
-  margin-right: 1.2rem;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-.nav-left a:hover {
-  color: #007acc;
-}
-
-/* Lado direito: ícones */
-.nav-right {
+.navbar a {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #222;
+  transition: color 0.2s, background 0.2s;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+}
+
+.navbar a:hover {
+  background: #f2f2f2;
+  color: #0a68ff;
 }
 
 .nav-icon {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.3em;
+  margin-right: 0.5em;
 }
 
-.nav-icon:hover {
-  transform: scale(1.1);
+.nav-label {
+  display: inline-block;
+  vertical-align: middle;
 }
-/* Botão toggle do sidebar */
+.nav-left,
+.nav-right {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1rem;
+}
 .toggle-sidebar {
   margin-right: auto;
   background: transparent;
@@ -107,9 +111,8 @@ h1, h2, h3, h4 {
   transition: all 0.3s ease;
 }
 
-/* Sidebar */
 .sidebar {
-  width: 250px;
+  width: 15.625rem;
   background: var(--sidebar);
   box-shadow: var(--shadow);
   border-right: 1px solid var(--border);
@@ -119,13 +122,12 @@ h1, h2, h3, h4 {
   gap: 2rem;
   transition: all 0.3s ease;
   overflow-y: auto;
-  height: calc(100vh - 64px); /* Ajuste se navbar for maior/menor */
+  height: calc(100vh - 4rem);
   position: sticky;
-  top: 64px;
+  top: 4rem;
   z-index: 10;
 }
 
-/* Sidebar oculta */
 .sidebar.hidden {
   width: 0;
   padding: 0;
@@ -133,7 +135,6 @@ h1, h2, h3, h4 {
   border: none;
 }
 
-/* Área principal */
 .main-content {
   flex: 1;
   max-width: 100%;
@@ -141,7 +142,6 @@ h1, h2, h3, h4 {
   transition: all 0.3s ease;
 }
 
-/* 🧱 Cartões */
 .card {
   background: var(--sidebar);
   border-radius: var(--radius);
@@ -156,7 +156,7 @@ h1, h2, h3, h4 {
 
 .card-year {
   font-size: 0.8rem;
-  color: #999;
+  color: #f9f9f9;
   font-weight: bold;
 }
 
@@ -179,10 +179,9 @@ h1, h2, h3, h4 {
   text-decoration: underline;
 }
 
-/* 🧱 Grid de Projetos */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16.25rem, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
@@ -224,18 +223,17 @@ h1, h2, h3, h4 {
   color: #fff;
 }
 
-/* 📚 Grid de Artigos */
 .article-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
 }
 
 .article-card {
-  background: #fdf8f3;
+  background: var(--sidebar);
   border: 1px solid #e2dcd2;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -244,8 +242,8 @@ h1, h2, h3, h4 {
 }
 
 .article-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.06);
 }
 
 .article-icon {
@@ -261,7 +259,7 @@ h1, h2, h3, h4 {
 
 .article-title {
   font-weight: bold;
-  color: #c44b9a;
+  color:#018ca8;
   text-decoration: none;
   font-size: 1rem;
 }
@@ -276,7 +274,6 @@ h1, h2, h3, h4 {
   color: #444;
 }
 
-/* 🔻 Rodapé */
 footer {
   text-align: center;
   color: #888;
@@ -285,8 +282,7 @@ footer {
   font-size: 0.95em;
 }
 
-/* 📱 Responsividade */
-@media (max-width: 800px) {
+@media (max-width: 50rem) {
   .content-wrapper {
     flex-direction: column;
   }
@@ -302,7 +298,7 @@ footer {
   }
 
   .main-content {
-    padding: 1rem;
+    padding-top: 4.5rem; /* Ajuste esse valor para corresponder à altura da navbar */
   }
 
   .sidebar.hidden {

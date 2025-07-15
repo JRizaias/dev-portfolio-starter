@@ -230,6 +230,7 @@ h1, h2, h3, h4 {
   margin-top: 1rem;
 }
 
+
 .article-card {
   background: var(--sidebar);
   border: 1px solid #e2dcd2;
@@ -304,4 +305,43 @@ footer {
   .sidebar.hidden {
     display: none;
   }
+}
+
+.area-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.3rem;
+  margin-top: 2rem;
+}
+.area-card {
+  background: var(--sidebar);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 2rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+  outline: none;
+}
+.area-card:focus, .area-card:hover {
+  box-shadow: 0 0.125rem 1.2rem rgba(2, 140, 168, 0.15);
+  border-color: var(--accent);
+}
+.area-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--accent);
+}
+.area-count {
+  font-size: 0.95em;
+  color: #888;
+  margin-top: 0.2em;
+}
+.area-viewer h2 {
+  margin-bottom: 1.2rem;
+}
+.area-back-btn {
+  margin-bottom: 1.2rem;
 }

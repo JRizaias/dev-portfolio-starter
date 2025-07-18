@@ -345,3 +345,21 @@ footer {
 .area-back-btn {
   margin-bottom: 1.2rem;
 }
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #018ca8;
+  font-size: 1.04rem;
+  font-weight: 500;
+  padding: 0 0.25rem 0 0;
+  cursor: pointer;
+  transition: color 0.15s;
+  outline: none;
+  margin-right: 0.2rem;
+}
+.back-btn:hover,
+.back-btn:focus {
+  color: #05596a;
+  text-decoration: underline;
+}

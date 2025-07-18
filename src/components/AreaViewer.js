@@ -5,18 +5,38 @@ export function createAreaViewer(area, projects, onProjectDetails, onBack) {
   const section = document.createElement('section');
   section.className = 'card area-viewer';
 
-  section.innerHTML = `
-    <button class="btn area-back-btn" type="button">&larr; Voltar</button>
-    <h2>${area}</h2>
-    <div class="project-grid"></div>
-  `;
+  // Header flexível com botão de voltar e título da área
+  const header = document.createElement('div');
+  header.style.display = 'flex';
+  header.style.alignItems = 'center';
+  header.style.gap = '0.7rem';
+  header.style.marginBottom = '1.1rem';
 
-  section.querySelector('.area-back-btn').addEventListener('click', onBack);
+  // Botão minimalista
+  const backBtn = document.createElement('button');
+  backBtn.className = 'back-btn';
+  backBtn.type = 'button';
+  backBtn.innerHTML = '← Voltar';
+  backBtn.onclick = onBack;
 
-  const grid = section.querySelector('.project-grid');
+  // Título da área
+  const title = document.createElement('h2');
+  title.textContent = area;
+  title.style.margin = '0';
+
+  header.appendChild(backBtn);
+  header.appendChild(title);
+  section.appendChild(header);
+
+  // Grid de projetos
+  const grid = document.createElement('div');
+  grid.className = 'project-grid';
+
   projects.forEach(p => {
     grid.appendChild(createProjectCard(p, onProjectDetails));
   });
+
+  section.appendChild(grid);
 
   return section;
 }

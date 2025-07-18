@@ -83,7 +83,7 @@ function renderMainContent() {
   if (!selectedArea && !selectedProject) {
     // Tela inicial: 1) áreas  2) artigos
     main.appendChild(createAreasSection());
-    main.appendChild(createArticlesSection(articles)); // NOVO
+    main.appendChild(createArticlesSection(articles)); // Seção de artigos
   } else if (selectedArea && !selectedProject) {
     // Lista de projetos da área selecionada
     const projs = projects.filter(p => (p.areas || []).includes(selectedArea));
@@ -92,17 +92,36 @@ function renderMainContent() {
     // Detalhe do projeto selecionado
     const section = document.createElement('section');
     section.className = 'card';
-    const btn = document.createElement('button');
-    btn.className = 'btn';
-    btn.textContent = '← Voltar';
-    btn.style.marginBottom = '1rem';
-    btn.onclick = selectedArea ? handleBackToProjects : handleBackToAreas;
-    section.appendChild(btn);
+
+    // Header flexível com botão de voltar e título do projeto
+    const header = document.createElement('div');
+    header.style.display = 'flex';
+    header.style.alignItems = 'center';
+    header.style.gap = '0.7rem';
+    header.style.marginBottom = '1.1rem';
+
+    // Botão minimalista
+    const backBtn = document.createElement('button');
+    backBtn.className = 'back-btn';
+    backBtn.type = 'button';
+    backBtn.innerHTML = '← Voltar';
+    backBtn.onclick = selectedArea ? handleBackToProjects : handleBackToAreas;
+
+    // Título do projeto
+    const title = document.createElement('h2');
+    title.textContent = selectedProject.titulo;
+    title.style.margin = '0';
+
+    // Monta o header e adiciona à seção
+    header.appendChild(backBtn);
+    header.appendChild(title);
+    section.appendChild(header);
+
+    // Conteúdo do projeto
     section.appendChild(createProjectViewer(selectedProject));
     main.appendChild(section);
   }
 }
-
 // Renderização de toda a página (navbar, sidebar, main, footer)
 function renderPage() {
   const layout = document.getElementById('layout');

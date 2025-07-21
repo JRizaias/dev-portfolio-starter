@@ -1,74 +1,86 @@
 [
   {
+    "id": "graphql-intro",
     "title": "An Introduction to GraphQL",
     "description": "A beginner-friendly guide to GraphQL and its core concepts.",
     "icon": "🧠",
-    "link": "#"
+    "content": "# An Introduction to GraphQL\n\nGraphQL is a query language for APIs. It allows you to request only the data you need.\n\n## Why Use GraphQL?\n- Flexible queries\n- Strong typing\n- Single endpoint\n\n**Example Query:**\n```graphql\n{\n  user(id: \"1\") {\n    name\n    email\n  }\n}\n```\n\n[Official Documentation](https://graphql.org/)"
   },
   {
+    "id": "react-structure",
     "title": "How to Structure and Organize a React Application",
     "description": "Best practices for organizing large-scale React projects.",
     "icon": "📂",
-    "link": "#"
+    "content": "# Organizing React Projects\n\nOrganizing your React codebase is crucial for maintainability.\n\n- Use feature folders\n- Separate UI from logic\n\n## Folder Example\n```\n/src\n  /components\n  /features\n  /hooks\n  /utils\n```\n\nRead more at [React Docs](https://react.dev/)."
   },
   {
+    "id": "webpack-setup",
     "title": "How to Set Up webpack 5 From Scratch",
     "description": "Step-by-step guide to configuring Webpack 5 manually.",
     "icon": "⚙️",
-    "link": "#"
+    "content": "# Webpack 5 Setup\n\nWebpack helps bundle your JavaScript applications. To set it up:\n\n1. Install with npm:\n   ```bash\n   npm install webpack webpack-cli --save-dev\n   ```\n2. Create `webpack.config.js`:\n   ```js\n   module.exports = {\n     entry: './src/index.js',\n     output: {\n       filename: 'bundle.js',\n       path: __dirname + '/dist'\n     }\n   };\n   ```\n3. Run `npx webpack` to build.\n\nSee [Webpack Guides](https://webpack.js.org/guides/)."
   },
   {
+    "id": "js-event-loop",
     "title": "The Event Loop, Callbacks, Promises, and Async/Await in JavaScript",
     "description": "Deep dive into asynchronous JavaScript mechanisms.",
     "icon": "🌀",
-    "link": "#"
+    "content": "# Event Loop & Async JavaScript\n\nJavaScript is single-threaded, but asynchronous. Learn how the event loop works!\n\n- **Callbacks** handle async tasks\n- **Promises** simplify chaining\n- **Async/Await** make async code readable\n\nExample:\n```js\nasync function fetchData() {\n  const data = await fetch('/api');\n  return data.json();\n}\n```\n\n[MDN: Event Loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)"
   },
   {
+    "id": "redux-react",
     "title": "How to Use Redux and React",
     "description": "Integrate Redux in your React apps with clean architecture.",
     "icon": "🧱",
-    "link": "#"
+    "content": "# Redux + React\n\nRedux helps manage state outside your components. Use it with React hooks:\n\n- `useSelector` for state\n- `useDispatch` for actions\n\nSample code:\n```js\nconst count = useSelector(state => state.count);\nconst dispatch = useDispatch();\n```\n\nLearn more at [Redux Docs](https://redux.js.org/)."
   },
   {
+    "id": "mac-dev-setup",
     "title": "How to Set up a Mac for Development",
     "description": "Tools and settings to optimize a dev workflow on macOS.",
     "icon": "🍎",
-    "link": "#"
+    "content": "# Mac Development Setup\n\nInstall these tools:\n- Homebrew\n- iTerm2\n- VSCode\n\nCustomize your shell and use [Homebrew](https://brew.sh/) to manage packages."
   },
   {
+    "id": "css-guide",
     "title": "A Complete Guide to CSS Concepts and Fundamentals",
     "description": "Master layout, selectors, and advanced CSS topics.",
     "icon": "🎨",
-    "link": "#"
+    "content": "# CSS Fundamentals\n\n- Selectors\n- Box Model\n- Flexbox/Grid\n\n```css\n.container {\n  display: flex;\n}\n```\n\nSee [CSS Tricks](https://css-tricks.com/snippets/css/complete-guide-grid/)"
   },
   {
+    "id": "vue-js",
     "title": "How to Use Vue, the JavaScript Framework",
     "description": "Create interactive interfaces using Vue.",
     "icon": "🖼️",
-    "link": "#"
+    "content": "# Vue Basics\n\nVue is approachable and flexible. Try this:\n```html\n<div id=\"app\">{{ message }}</div>\n<script>\nnew Vue({ el: '#app', data: { message: 'Hello Vue!' } })\n</script>\n```\nLearn more at [Vue.js](https://vuejs.org/)"
   },
   {
+    "id": "self-taught-dev",
     "title": "Everything I Know as a Software Developer Without a Degree",
     "description": "Insights and experience from a self-taught developer.",
     "icon": "📚",
-    "link": "#"
+    "content": "# Self-Taught Developer\n\nYou can learn to code without a CS degree. Use:\n- Online courses\n- Open-source projects\n- Practice consistently\n\nSee [freeCodeCamp](https://freecodecamp.org/)"
   },
   {
+    "id": "react-guide",
     "title": "How to Use React, the JavaScript Framework",
     "description": "Understand the core of React and component architecture.",
     "icon": "⚛️",
-    "link": "#"
+    "content": "# React Guide\n\nReact lets you build UI with components.\n\n```js\nfunction App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nSee [React Docs](https://react.dev/)"
   },
   {
+    "id": "design-for-devs",
     "title": "Design for Developers: Specific Steps to Improve Your Website Design",
     "description": "Practical tips for improving aesthetics and usability.",
     "icon": "🖌️",
-    "link": "#"
+    "content": "# Design Tips for Devs\n\n- Use white space\n- Align content\n- Limit fonts and colors\n\nCheck [A List Apart](https://alistapart.com/)"
   },
   {
+    "id": "linux-cli",
     "title": "How to Use the Command Line in Linux and macOS",
     "description": "Essential commands and workflows for terminal productivity.",
     "icon": "💻",
-    "link": "#"
+    "content": "# Command Line Basics\n\nFamiliarize yourself with:\n- `ls`\n- `cd`\n- `mkdir`\n- `rm`\n\nSee [Linux Command Handbook](https://www.freecodecamp.org/news/linux-command-line/)"
   }
 ]

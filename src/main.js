@@ -5,13 +5,15 @@ import { createFooter } from './components/Footer.js';
 import { createAreaCard } from './components/AreaCard.js';
 import { createAreaViewer } from './components/AreaViewer.js';
 import { createProjectViewer } from './components/ProjectViewer.js';
-import { createArticlesSection } from './components/ArticlesSection.js'; // NOVO
+import { createArticlesSection } from './components/ArticlesSection.js';
+import { createArticleViewer } from './components/ArticleViewer.js'; // NOVO
 import projects from './data/projects.json' assert { type: "json" };
-import articles from './data/articles.json' assert { type: "json" }; // NOVO
+import articles from './data/articles.json' assert { type: "json" };
 
 // Estado global simples para navegação SPA
 let selectedArea = null;
 let selectedProject = null;
+let selectedArticle = null;
 
 // Agrupa projetos por área
 function groupProjectsByArea(projects) {
@@ -49,29 +51,42 @@ function createAreasSection() {
   return section;
 }
 
-// Callback quando o usuário seleciona uma área
+// Callbacks de navegação SPA
 function handleSelectArea(area) {
   selectedArea = area;
   selectedProject = null;
+  selectedArticle = null;
   renderMainContent();
 }
 
-// Callback quando o usuário clica em "Ver detalhes" de um projeto
 function handleProjectDetails(project) {
   selectedProject = project;
+  selectedArticle = null;
   renderMainContent();
 }
 
-// Callback para voltar da lista de projetos para a lista de áreas
 function handleBackToAreas() {
+  selectedArea = null;
+  selectedProject = null;
+  selectedArticle = null;
+  renderMainContent();
+}
+
+function handleBackToProjects() {
+  selectedProject = null;
+  selectedArticle = null;
+  renderMainContent();
+}
+
+function handleArticleDetails(article) {
+  selectedArticle = article;
   selectedArea = null;
   selectedProject = null;
   renderMainContent();
 }
 
-// Callback para voltar do detalhe do projeto para a lista de projetos da área
-function handleBackToProjects() {
-  selectedProject = null;
+function handleBackToArticles() {
+  selectedArticle = null;
   renderMainContent();
 }
 
@@ -80,10 +95,16 @@ function renderMainContent() {
   const main = document.querySelector('.main-content');
   main.innerHTML = '';
 
+  // Visualização detalhada do artigo (SPA)
+  if (selectedArticle) {
+    main.appendChild(createArticleViewer(selectedArticle, handleBackToArticles));
+    return;
+  }
+
   if (!selectedArea && !selectedProject) {
     // Tela inicial: 1) áreas  2) artigos
     main.appendChild(createAreasSection());
-    main.appendChild(createArticlesSection(articles)); // Seção de artigos
+    main.appendChild(createArticlesSection(articles, handleArticleDetails));
   } else if (selectedArea && !selectedProject) {
     // Lista de projetos da área selecionada
     const projs = projects.filter(p => (p.areas || []).includes(selectedArea));
@@ -122,6 +143,7 @@ function renderMainContent() {
     main.appendChild(section);
   }
 }
+
 // Renderização de toda a página (navbar, sidebar, main, footer)
 function renderPage() {
   const layout = document.getElementById('layout');

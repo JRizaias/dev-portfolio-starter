@@ -1,44 +1,37 @@
 [
   {
-    "year": "2025",
-    "title": "Gestor de Notas BI",
-    "description": "Ferramenta web para organizar, buscar e compartilhar anotações em projetos de BI.",
-    "article": "#",
-    "demo": "#"
+    "id": "firewall-ai",
+    "title": "Firewall Inteligente",
+    "description": "# Firewall Inteligente 🚀\n\nSolução de firewall baseada em inteligência artificial para detecção de ameaças em tempo real.\n\n## Saiba mais\n- [Notícia: Como Firewalls de IA Estão Mudando a Segurança](https://canaltech.com.br/seguranca/firewall-inteligente-mudando-seguranca-ia-234781/)\n- [Artigo na InfoSec News](https://www.infosecnews.com/firewall-ai-review)\n\n## Veja também\n- [Vídeo explicativo no YouTube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)\n\n## Imagem\n![Diagrama de arquitetura do firewall](https://placehold.co/400x150?text=Arquitetura+Firewall)\n",
+    "year": 2024,
+    "areas": ["Cybersegurança", "Desenvolvimento Web"]
   },
   {
-    "year": "2024",
-    "title": "SertãoSoft Dashboard",
-    "description": "Dashboard analítico com integração em tempo real para pequenas empresas.",
-    "article": "#",
-    "demo": "#"
+    "id": "painel-vendas",
+    "title": "Painel de Dados de Vendas",
+    "description": "# Painel de Dados de Vendas\n\nDashboard em Power BI para monitorar KPIs de vendas.\n\n## Notícias relacionadas\n- [Reportagem: O impacto do BI nas vendas](https://exame.com/negocios/impacto-bi-vendas/)\n- [Blog: Melhores Dashboards de 2023](https://blog.powerbi.com/top-dashboards-2023)\n\n## Interface do dashboard\n![Dashboard Example](https://placehold.co/600x200)\n",
+    "year": 2023,
+    "areas": ["Dados", "Business Intelligence"]
   },
   {
-    "year": "2024",
-    "title": "Controle de Estoque IoT",
-    "description": "Sistema de monitoramento de estoque com sensores conectados e alertas automáticos.",
-    "article": "#",
-    "demo": "#"
+    "id": "plataforma-ead",
+    "title": "Plataforma EAD Personalizada",
+    "description": "# Plataforma EAD Personalizada\n\nSistema de ensino a distância para escolas públicas.\n\n## Matéria\n- [G1: EAD em escolas públicas avança após pandemia](https://g1.globo.com/educacao/noticia/2022/07/15/ead-em-escolas-publicas-pandemia.ghtml)\n\n## Videoaula\n- [Assista à apresentação do projeto](https://www.youtube.com/watch?v=5qap5aO4i9A)\n\n## Imagem\n![Alunos usando a plataforma](https://placehold.co/500x200?text=Alunos+usando+a+plataforma)\n",
+    "year": 2022,
+    "areas": ["Desenvolvimento Web", "Educação"]
   },
   {
-    "year": "2023",
-    "title": "Simulador Financeiro",
-    "description": "App para simular cenários de investimentos e comparar retornos em diferentes ativos.",
-    "article": "#",
-    "demo": "#"
+    "id": "detector-fraudes",
+    "title": "Detector de Fraudes com IA",
+    "description": "# Detector de Fraudes com IA\n\nMachine Learning para identificar fraudes financeiras em tempo real.\n\n## Notícias e Artigos\n- [Exame: Inteligência Artificial contra fraudes bancárias](https://exame.com/tecnologia/ia-fraudes-bancarias/)\n- [MIT News: Machine Learning for fraud detection](https://news.mit.edu/2023/fraud-detection-machine-learning-0322)\n\n## Demonstração\n- [Veja a demo do painel](https://demo.fraudes-ia.com)\n",
+    "year": 2024,
+    "areas": ["Cybersegurança", "Dados", "Machine Learning"]
   },
   {
-    "year": "2023",
-    "title": "Checklist de Projetos",
-    "description": "Aplicação para criar e acompanhar checklists colaborativos em equipes remotas.",
-    "article": "#",
-    "demo": "#"
-  },
-  {
-    "year": "2022",
-    "title": "Gerador de Currículo",
-    "description": "Plataforma para gerar currículos bonitos e modernos em PDF a partir de dados simples.",
-    "article": "#",
-    "demo": "#"
+    "id": "app-saude",
+    "title": "Aplicativo de Saúde Mental",
+    "description": "# Aplicativo de Saúde Mental\n\nApp mobile para acompanhamento psicológico remoto.\n\n## Leia mais\n- [Veja reportagem sobre o impacto do app](https://oglobo.globo.com/saude/tecnologia-aplicativos-psicologia-25513744)\n\n## Vídeo\n- [Assista a entrevista com o criador](https://www.youtube.com/watch?v=3fumBcKC6RE)\n\n## Imagem\n![App screenshot](https://placehold.co/350x700?text=App+Sa%C3%BAde)\n",
+    "year": 2023,
+    "areas": ["Mobile", "Saúde", "Psicologia"]
   }
 ]

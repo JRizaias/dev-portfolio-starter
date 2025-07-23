@@ -1,6 +1,6 @@
 import { createArticleCard } from './ArticleCard.js';
 
-export function createArticlesSection(articles) {
+export function createArticlesSection(articles, onArticleDetails) {
   const section = document.createElement('section');
   section.className = 'card articles-section';
 
@@ -12,7 +12,7 @@ export function createArticlesSection(articles) {
   grid.className = 'article-grid'; // <--- aqui!
 
   articles.forEach(article => {
-    grid.appendChild(createArticleCard(article));
+    grid.appendChild(createArticleCard(article, onArticleDetails));
   });
 
   section.appendChild(grid);

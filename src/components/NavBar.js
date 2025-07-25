@@ -1,4 +1,4 @@
-export function createNavBar() {
+export function createNavBar(onToggleSidebar) {
   const nav = document.createElement('nav');
   nav.className = 'navbar';
   nav.setAttribute('role', 'navigation');
@@ -6,6 +6,23 @@ export function createNavBar() {
 
   const leftSection = document.createElement('div');
   leftSection.className = 'nav-left';
+
+  // Sidebar toggle button
+  const toggleBtn = document.createElement('button');
+  toggleBtn.className = 'toggle-sidebar';
+  toggleBtn.type = 'button';
+  toggleBtn.setAttribute('aria-label', 'Alternar navegação lateral');
+  toggleBtn.setAttribute('title', 'Mostrar/ocultar menu lateral');
+  toggleBtn.tabIndex = 0;
+  toggleBtn.innerHTML = '<span aria-hidden="true">☰</span>';
+  toggleBtn.addEventListener('click', onToggleSidebar);
+  toggleBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onToggleSidebar();
+    }
+  });
+  leftSection.appendChild(toggleBtn);
 
   const links = [
     { href: 'index.html', icon: '🏠', label: 'Notes' },

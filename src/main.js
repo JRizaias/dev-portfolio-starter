@@ -145,17 +145,51 @@ function renderMainContent() {
 }
 
 // Renderização de toda a página (navbar, sidebar, main, footer)
+// Sidebar state management
+let isSidebarCollapsed = false;
+
+function saveSidebarState(collapsed) {
+  try {
+    localStorage.setItem('sidebarCollapsed', collapsed ? '1' : '0');
+  } catch (e) {}
+}
+
+function loadSidebarState() {
+  try {
+    return localStorage.getItem('sidebarCollapsed') === '1';
+  } catch (e) { return false; }
+}
+
+function handleSidebarToggle() {
+  isSidebarCollapsed = !isSidebarCollapsed;
+  saveSidebarState(isSidebarCollapsed);
+  updateSidebarVisibility();
+}
+
+function updateSidebarVisibility() {
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar) {
+    if (isSidebarCollapsed) {
+      sidebar.classList.add('hidden');
+    } else {
+      sidebar.classList.remove('hidden');
+    }
+  }
+}
+
 function renderPage() {
+  isSidebarCollapsed = loadSidebarState();
   const layout = document.getElementById('layout');
   layout.innerHTML = '';
 
-  const navbar = createNavBar();
+  const navbar = createNavBar(handleSidebarToggle);
   layout.appendChild(navbar);
 
   const contentWrapper = document.createElement('div');
   contentWrapper.className = 'content-wrapper';
 
   const sidebar = createSidebar();
+  if (isSidebarCollapsed) sidebar.classList.add('hidden');
   contentWrapper.appendChild(sidebar);
 
   const main = document.createElement('main');
@@ -169,6 +203,7 @@ function renderPage() {
 
   renderMainContent();
 }
+
 
 // Inicialização ao carregar DOM
 document.addEventListener('DOMContentLoaded', renderPage);

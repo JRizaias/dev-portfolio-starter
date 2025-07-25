@@ -95,12 +95,23 @@ h1, h2, h3, h4 {
   gap: 1rem;
 }
 .toggle-sidebar {
-  margin-right: auto;
+  margin-right: 1.2rem;
   background: transparent;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   cursor: pointer;
   color: var(--accent);
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+  transition: background 0.2s, color 0.2s;
+}
+.toggle-sidebar:focus {
+  outline: 2px solid var(--accent2);
+  background: #f2f2f2;
+}
+.toggle-sidebar:hover {
+  background: #f2f2f2;
+  color: #05596a;
 }
 
 /* 📦 Container do sidebar + main */
@@ -114,23 +125,23 @@ h1, h2, h3, h4 {
 .sidebar {
   width: 15.625rem;
   background: var(--sidebar);
-  box-shadow: var(--shadow);
   border-right: 1px solid var(--border);
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  padding: 2rem 1.2rem 2rem 1.5rem;
+  transition: width 0.3s cubic-bezier(.4,1.6,.4,1), padding 0.3s cubic-bezier(.4,1.6,.4,1), opacity 0.3s, border 0.3s;
   overflow-y: auto;
   height: calc(100vh - 4rem);
   position: sticky;
   top: 4rem;
   z-index: 10;
+  opacity: 1;
 }
 
 .sidebar.hidden {
-  width: 0;
-  padding: 0;
+  width: 0 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  opacity: 0;
   overflow: hidden;
   border: none;
 }

@@ -76,6 +76,63 @@ h1, h2, h3, h4 {
   color: #0a68ff;
 }
 
+/* --- Search Bar Styles --- */
+.search-bar-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 0.7rem;
+  position: relative;
+  flex: 1 1 18rem;
+  max-width: 26rem;
+  min-width: 8rem;
+}
+.global-search-bar {
+  width: 100%;
+  padding: 0.45em 2.2em 0.45em 1em;
+  border-radius: 1.2em;
+  border: 1.5px solid #e0e0e0;
+  font-size: 1.07rem;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border 0.2s;
+  box-shadow: none;
+}
+.global-search-bar:focus {
+  border-color: #bdbdbd;
+  box-shadow: none;
+}
+.search-clear-btn {
+  position: absolute;
+  right: 0.7em;
+  background: transparent;
+  border: none;
+  font-size: 1.3em;
+  color: #aaa;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transition: color 0.2s;
+}
+.search-clear-btn:hover, .search-clear-btn:focus {
+  color: var(--accent);
+}
+@media (max-width: 50rem) {
+  .search-bar-wrapper {
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin-left: 0.3rem;
+  }
+  .global-search-bar {
+    font-size: 1rem;
+    padding: 0.38em 2em 0.38em 0.8em;
+  }
+}
+
 .nav-icon {
   display: inline-flex;
   align-items: center;

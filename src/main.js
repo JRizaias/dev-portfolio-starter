@@ -7,6 +7,7 @@ import { createAreaViewer } from './components/AreaViewer.js';
 import { createProjectViewer } from './components/ProjectViewer.js';
 import { createArticlesSection } from './components/ArticlesSection.js';
 import { createArticleViewer } from './components/ArticleViewer.js'; // NOVO
+import { createProjectsSection } from './components/ProjectsSection.js';
 import projects from './data/projects.json' assert { type: "json" };
 import articles from './data/articles.json' assert { type: "json" };
 
@@ -91,6 +92,113 @@ function handleBackToArticles() {
 }
 
 // Renderização principal do conteúdo central da página
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '');
+}
+
+function highlightMatches(text, query) {
+  if (!query || !text) return text;
+  // Normalize and remove punctuation for tolerant highlighting
+  const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=>^`|~]/gu, '') : '';
+  const keywords = query.trim().split(/\s+/).map(normalize).filter(Boolean);
+  if (!keywords.length) return text;
+  // Tokenize text for highlighting
+  let raw = text;
+  let norm = normalize(text);
+  // Find all match positions
+  let matches = [];
+  keywords.forEach(kw => {
+    let idx = norm.indexOf(kw);
+    while (idx !== -1 && kw.length > 0) {
+      matches.push([idx, idx + kw.length]);
+      idx = norm.indexOf(kw, idx + kw.length);
+    }
+  });
+  if (!matches.length) return text;
+  // Merge overlapping matches
+  matches.sort((a, b) => a[0] - b[0]);
+  let merged = [];
+  matches.forEach(([start, end]) => {
+    if (!merged.length || start > merged[merged.length - 1][1]) {
+      merged.push([start, end]);
+    } else {
+      merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], end);
+    }
+  });
+  // Build highlighted string
+  let result = '';
+  let last = 0;
+  merged.forEach(([start, end]) => {
+    // Map normalized indices back to raw text indices
+    let rawStart = findRawIndex(norm, raw, start);
+    let rawEnd = findRawIndex(norm, raw, end);
+    result += raw.slice(last, rawStart);
+    result += '<mark>' + raw.slice(rawStart, rawEnd) + '</mark>';
+    last = rawEnd;
+  });
+  result += raw.slice(last);
+  return result;
+}
+// Helper to map normalized string index to raw text index
+function findRawIndex(norm, raw, idx) {
+  let n = 0, r = 0;
+  while (n < idx && r < raw.length) {
+    let c = raw[r];
+    let normChar = c.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=>^`|~]/gu, '');
+    if (normChar.length > 0) n += normChar.length;
+    r++;
+  }
+  return r;
+}
+
+function filterProjects(projects, query) {
+  if (!query) return projects;
+  // Normalize and remove punctuation from both haystack and query
+  const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=>^`|~]/gu, '') : '';
+  const normQuery = normalize(query.trim());
+  if (!normQuery) return projects;
+  return projects.filter(p => {
+    let haystack = '';
+    if (p.title) haystack += ' ' + p.title;
+    if (p.description) haystack += ' ' + p.description;
+    if (p.content) haystack += ' ' + p.content;
+    if (p.tags && Array.isArray(p.tags)) haystack += ' ' + p.tags.join(' ');
+    if (p.areas && Array.isArray(p.areas)) haystack += ' ' + p.areas.join(' ');
+    if (p.year) haystack += ' ' + p.year;
+    if (p.icon) haystack += ' ' + p.icon;
+    haystack = normalize(haystack);
+    return haystack.includes(normQuery);
+  });
+}
+
+function filterArticles(articles, query) {
+  if (!query) return articles;
+  // Normalize and remove punctuation from both haystack and keywords
+  const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=>^`|~]/gu, '') : '';
+  const keywords = query.trim().split(/\s+/).map(normalize).filter(Boolean);
+  if (!keywords.length) return articles;
+  return articles.filter(a => {
+    let haystack = '';
+    if (a.title) haystack += ' ' + a.title;
+    if (a.description) haystack += ' ' + a.description;
+    if (a.content) haystack += ' ' + a.content;
+    if (a.icon) haystack += ' ' + a.icon;
+    if (a.tags && Array.isArray(a.tags)) haystack += ' ' + a.tags.join(' ');
+    haystack = normalize(haystack);
+    return keywords.every(kw => haystack.includes(kw));
+  });
+}
+
+function filterAreas(projects, query) {
+  if (!query) return groupProjectsByArea(projects);
+  // Only keep areas with at least one matching project
+  const filteredProjects = filterProjects(projects, query);
+  return groupProjectsByArea(filteredProjects);
+}
+
 function renderMainContent() {
   const main = document.querySelector('.main-content');
   main.innerHTML = '';
@@ -102,9 +210,71 @@ function renderMainContent() {
   }
 
   if (!selectedArea && !selectedProject) {
-    // Tela inicial: 1) áreas  2) artigos
-    main.appendChild(createAreasSection());
-    main.appendChild(createArticlesSection(articles, handleArticleDetails));
+    const query = globalSearchQuery && globalSearchQuery.trim();
+    if (!query) {
+      // Default behavior: show all areas, projects, and articles as before
+      main.appendChild(createAreasSection());
+      main.appendChild(createArticlesSection(articles, handleArticleDetails));
+      return;
+    }
+
+    // Exibir projetos filtrados diretamente durante busca global
+    const filteredProjects = filterProjects(projects, query);
+    const filteredArticles = filterArticles(articles, query);
+    let hasResults = false;
+
+    if (filteredProjects.length > 0 || filteredArticles.length > 0) {
+      if (filteredProjects.length > 0) {
+        hasResults = true;
+        if (typeof createProjectsSection === 'function') {
+          main.appendChild(createProjectsSection(filteredProjects, handleProjectDetails, true)); // isSearchMode = true
+        } else {
+          const section = document.createElement('section');
+          section.className = 'card';
+          const heading = document.createElement('h2');
+          heading.textContent = 'Projetos';
+          heading.style.marginBottom = '1rem';
+          section.appendChild(heading);
+          const grid = document.createElement('div');
+          grid.className = 'area-grid';
+          filteredProjects.forEach(p => {
+            grid.appendChild(createProjectCard(p, handleProjectDetails, true)); // isSearchMode = true
+          });
+          section.appendChild(grid);
+          main.appendChild(section);
+        }
+        section.className = 'card';
+        const heading = document.createElement('h2');
+        heading.textContent = 'Projetos';
+        heading.style.marginBottom = '1rem';
+        section.appendChild(heading);
+        const grid = document.createElement('div');
+        grid.className = 'area-grid';
+        filteredProjects.forEach(p => {
+          grid.appendChild(createProjectCard(p, handleProjectDetails, true)); // isSearchMode = true
+        });
+        section.appendChild(grid);
+        main.appendChild(section);
+      }
+    }
+
+    // Articles Section (reuse default card/component logic)
+    if (filteredArticles.length > 0) {
+      hasResults = true;
+      main.appendChild(createArticlesSection(filteredArticles, handleArticleDetails));
+    }
+
+    if (!hasResults && query) {
+      const msg = document.createElement('div');
+      msg.className = 'no-results-msg';
+      msg.textContent = 'Nenhum item encontrado para sua busca.';
+      msg.style.margin = '2.5rem auto';
+      msg.style.fontSize = '1.15rem';
+      msg.style.textAlign = 'center';
+      msg.style.color = '#888';
+      main.appendChild(msg);
+    }
+    return;
   } else if (selectedArea && !selectedProject) {
     // Lista de projetos da área selecionada
     const projs = projects.filter(p => (p.areas || []).includes(selectedArea));
@@ -177,12 +347,25 @@ function updateSidebarVisibility() {
   }
 }
 
+// Global search state
+let globalSearchQuery = '';
+let globalSearchDebounceTimer = null;
+
+function handleGlobalSearchInput(query) {
+  globalSearchQuery = query;
+  // Debounce: only update after user stops typing for 200ms
+  clearTimeout(globalSearchDebounceTimer);
+  globalSearchDebounceTimer = setTimeout(() => {
+    renderMainContent();
+  }, 200);
+}
+
 function renderPage() {
   isSidebarCollapsed = loadSidebarState();
   const layout = document.getElementById('layout');
   layout.innerHTML = '';
 
-  const navbar = createNavBar(handleSidebarToggle);
+  const navbar = createNavBar(handleSidebarToggle, handleGlobalSearchInput);
   layout.appendChild(navbar);
 
   const contentWrapper = document.createElement('div');

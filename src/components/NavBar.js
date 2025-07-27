@@ -1,4 +1,6 @@
-export function createNavBar(onToggleSidebar) {
+import { createSearchBar } from './SearchBar.js';
+
+export function createNavBar(onToggleSidebar, onSearchInput) {
   const nav = document.createElement('nav');
   nav.className = 'navbar';
   nav.setAttribute('role', 'navigation');
@@ -23,6 +25,10 @@ export function createNavBar(onToggleSidebar) {
     }
   });
   leftSection.appendChild(toggleBtn);
+
+  // Search bar (global)
+  const searchBar = createSearchBar(onSearchInput);
+  leftSection.appendChild(searchBar);
 
   const links = [
     { href: 'index.html', icon: '🏠', label: 'Notes' },

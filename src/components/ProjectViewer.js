@@ -14,7 +14,7 @@ function highlightBlocks(container) {
   }
 }
 
-export function createProjectViewer(project) {
+export function createProjectViewer(project, isSearchMode = false) {
   const wrapper = document.createElement('section');
   wrapper.className = 'project-viewer';
 
@@ -25,13 +25,21 @@ export function createProjectViewer(project) {
 
   const md = window.marked.parse(project.description ?? '', {sanitize: true});
 
-  wrapper.innerHTML = `
-    <div class="pv-content">
-      <h2>${sanitizeHTML(project.title || '')}</h2>
-      <span class="pv-year">${sanitizeHTML(project.year || '')}</span>
-      <article tabindex="0">${md}</article>
-    </div>
-  `;
+  if (isSearchMode) {
+    wrapper.innerHTML = `
+      <div class="pv-content">
+        <article tabindex="0">${md}</article>
+      </div>
+    `;
+  } else {
+    wrapper.innerHTML = `
+      <div class="pv-content">
+        <h2>${sanitizeHTML(project.title || '')}</h2>
+        <span class="pv-year">${sanitizeHTML(project.year || '')}</span>
+        <article tabindex="0">${md}</article>
+      </div>
+    `;
+  }
 
   highlightBlocks(wrapper);
 

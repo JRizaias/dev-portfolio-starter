@@ -1,5 +1,5 @@
 // src/components/AreaCard.js
-export function createAreaCard(area, count, onSelect) {
+export function createAreaCard(area, count, onSelect, isSearchMode = false) {
   const card = document.createElement('div');
   card.className = 'area-card';
   card.tabIndex = 0;
@@ -9,9 +9,15 @@ export function createAreaCard(area, count, onSelect) {
     <h3>${area}</h3>
     <span class="area-count">${count} projeto${count > 1 ? 's' : ''}</span>
   `;
-  card.addEventListener('click', () => onSelect(area));
-  card.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') onSelect(area);
-  });
+  if (isSearchMode) {
+    card.classList.add('disabled');
+    card.tabIndex = -1;
+    card.setAttribute('aria-disabled', 'true');
+  } else {
+    card.addEventListener('click', () => onSelect(area));
+    card.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') onSelect(area);
+    });
+  }
   return card;
 }

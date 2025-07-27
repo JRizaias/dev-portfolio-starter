@@ -1,5 +1,6 @@
 // src/components/ProjectCard.js
 export function createProjectCard(project, onViewDetails) {
+  console.log('[createProjectCard] Received project:', project, 'Keys:', Object.keys(project));
   const card = document.createElement('div');
   card.className = 'project-card';
 

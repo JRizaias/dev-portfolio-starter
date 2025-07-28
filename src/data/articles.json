@@ -1,86 +1,123 @@
 [
-  {
-    "id": "graphql-intro",
-    "title": "An Introduction to GraphQL",
-    "description": "A beginner-friendly guide to GraphQL and its core concepts.",
-    "icon": "🧠",
-    "content": "# An Introduction to GraphQL\n\nGraphQL is a query language for APIs. It allows you to request only the data you need.\n\n## Why Use GraphQL?\n- Flexible queries\n- Strong typing\n- Single endpoint\n\n**Example Query:**\n```graphql\n{\n  user(id: \"1\") {\n    name\n    email\n  }\n}\n```\n\n[Official Documentation](https://graphql.org/)"
-  },
-  {
-    "id": "react-structure",
-    "title": "How to Structure and Organize a React Application",
-    "description": "Best practices for organizing large-scale React projects.",
-    "icon": "📂",
-    "content": "# Organizing React Projects\n\nOrganizing your React codebase is crucial for maintainability.\n\n- Use feature folders\n- Separate UI from logic\n\n## Folder Example\n```\n/src\n  /components\n  /features\n  /hooks\n  /utils\n```\n\nRead more at [React Docs](https://react.dev/)."
-  },
-  {
-    "id": "webpack-setup",
-    "title": "How to Set Up webpack 5 From Scratch",
-    "description": "Step-by-step guide to configuring Webpack 5 manually.",
-    "icon": "⚙️",
-    "content": "# Webpack 5 Setup\n\nWebpack helps bundle your JavaScript applications. To set it up:\n\n1. Install with npm:\n   ```bash\n   npm install webpack webpack-cli --save-dev\n   ```\n2. Create `webpack.config.js`:\n   ```js\n   module.exports = {\n     entry: './src/index.js',\n     output: {\n       filename: 'bundle.js',\n       path: __dirname + '/dist'\n     }\n   };\n   ```\n3. Run `npx webpack` to build.\n\nSee [Webpack Guides](https://webpack.js.org/guides/)."
-  },
-  {
-    "id": "js-event-loop",
-    "title": "The Event Loop, Callbacks, Promises, and Async/Await in JavaScript",
-    "description": "Deep dive into asynchronous JavaScript mechanisms.",
-    "icon": "🌀",
-    "content": "# Event Loop & Async JavaScript\n\nJavaScript is single-threaded, but asynchronous. Learn how the event loop works!\n\n- **Callbacks** handle async tasks\n- **Promises** simplify chaining\n- **Async/Await** make async code readable\n\nExample:\n```js\nasync function fetchData() {\n  const data = await fetch('/api');\n  return data.json();\n}\n```\n\n[MDN: Event Loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)"
-  },
-  {
-    "id": "redux-react",
-    "title": "How to Use Redux and React",
-    "description": "Integrate Redux in your React apps with clean architecture.",
-    "icon": "🧱",
-    "content": "# Redux + React\n\nRedux helps manage state outside your components. Use it with React hooks:\n\n- `useSelector` for state\n- `useDispatch` for actions\n\nSample code:\n```js\nconst count = useSelector(state => state.count);\nconst dispatch = useDispatch();\n```\n\nLearn more at [Redux Docs](https://redux.js.org/)."
-  },
-  {
-    "id": "mac-dev-setup",
-    "title": "How to Set up a Mac for Development",
-    "description": "Tools and settings to optimize a dev workflow on macOS.",
-    "icon": "🍎",
-    "content": "# Mac Development Setup\n\nInstall these tools:\n- Homebrew\n- iTerm2\n- VSCode\n\nCustomize your shell and use [Homebrew](https://brew.sh/) to manage packages."
-  },
-  {
-    "id": "css-guide",
-    "title": "A Complete Guide to CSS Concepts and Fundamentals",
-    "description": "Master layout, selectors, and advanced CSS topics.",
-    "icon": "🎨",
-    "content": "# CSS Fundamentals\n\n- Selectors\n- Box Model\n- Flexbox/Grid\n\n```css\n.container {\n  display: flex;\n}\n```\n\nSee [CSS Tricks](https://css-tricks.com/snippets/css/complete-guide-grid/)"
-  },
-  {
-    "id": "vue-js",
-    "title": "How to Use Vue, the JavaScript Framework",
-    "description": "Create interactive interfaces using Vue.",
-    "icon": "🖼️",
-    "content": "# Vue Basics\n\nVue is approachable and flexible. Try this:\n```html\n<div id=\"app\">{{ message }}</div>\n<script>\nnew Vue({ el: '#app', data: { message: 'Hello Vue!' } })\n</script>\n```\nLearn more at [Vue.js](https://vuejs.org/)"
-  },
-  {
-    "id": "self-taught-dev",
-    "title": "Everything I Know as a Software Developer Without a Degree",
-    "description": "Insights and experience from a self-taught developer.",
-    "icon": "📚",
-    "content": "# Self-Taught Developer\n\nYou can learn to code without a CS degree. Use:\n- Online courses\n- Open-source projects\n- Practice consistently\n\nSee [freeCodeCamp](https://freecodecamp.org/)"
-  },
-  {
-    "id": "react-guide",
-    "title": "How to Use React, the JavaScript Framework",
-    "description": "Understand the core of React and component architecture.",
-    "icon": "⚛️",
-    "content": "# React Guide\n\nReact lets you build UI with components.\n\n```js\nfunction App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nSee [React Docs](https://react.dev/)"
-  },
-  {
-    "id": "design-for-devs",
-    "title": "Design for Developers: Specific Steps to Improve Your Website Design",
-    "description": "Practical tips for improving aesthetics and usability.",
-    "icon": "🖌️",
-    "content": "# Design Tips for Devs\n\n- Use white space\n- Align content\n- Limit fonts and colors\n\nCheck [A List Apart](https://alistapart.com/)"
-  },
-  {
-    "id": "linux-cli",
-    "title": "How to Use the Command Line in Linux and macOS",
-    "description": "Essential commands and workflows for terminal productivity.",
-    "icon": "💻",
-    "content": "# Command Line Basics\n\nFamiliarize yourself with:\n- `ls`\n- `cd`\n- `mkdir`\n- `rm`\n\nSee [Linux Command Handbook](https://www.freecodecamp.org/news/linux-command-line/)"
-  }
-]
+    {
+      "id": "graphql-intro",
+      "title_pt": "Introdução ao GraphQL",
+      "title_en": "An Introduction to GraphQL",
+      "description_pt": "Guia introdutório ao GraphQL e seus conceitos principais.",
+      "description_en": "A beginner-friendly guide to GraphQL and its core concepts.",
+      "icon": "🧠",
+      "content_pt": "# Introdução ao GraphQL\n\nGraphQL é uma linguagem de consulta para APIs. Permite solicitar apenas os dados necessários.\n\n## Por que usar GraphQL?\n- Consultas flexíveis\n- Tipagem forte\n- Endpoint único\n\n**Exemplo de consulta:**\n```graphql\n{\n  usuario(id: \"1\") {\n    nome\n    email\n  }\n}\n```\n\n[Documentação Oficial](https://graphql.org/)",
+      "content_en": "# An Introduction to GraphQL\n\nGraphQL is a query language for APIs. It allows you to request only the data you need.\n\n## Why Use GraphQL?\n- Flexible queries\n- Strong typing\n- Single endpoint\n\n**Example Query:**\n```graphql\n{\n  user(id: \"1\") {\n    name\n    email\n  }\n}\n```\n\n[Official Documentation](https://graphql.org/)"
+    },
+    {
+      "id": "react-structure",
+      "title_pt": "Como Estruturar e Organizar uma Aplicação React",
+      "title_en": "How to Structure and Organize a React Application",
+      "description_pt": "Boas práticas para organizar projetos React de grande porte.",
+      "description_en": "Best practices for organizing large-scale React projects.",
+      "icon": "📂",
+      "content_pt": "# Organizando Projetos React\n\nOrganizar seu código React é crucial para a manutenção.\n\n- Use pastas por funcionalidade\n- Separe UI da lógica\n\n## Exemplo de Estrutura de Pastas\n```\n/src\n  /components\n  /features\n  /hooks\n  /utils\n```\n\nLeia mais em [React Docs](https://react.dev/).",
+      "content_en": "# Organizing React Projects\n\nOrganizing your React codebase is crucial for maintainability.\n\n- Use feature folders\n- Separate UI from logic\n\n## Folder Example\n```\n/src\n  /components\n  /features\n  /hooks\n  /utils\n```\n\nRead more at [React Docs](https://react.dev/)."
+    },
+    {
+      "id": "webpack-setup",
+      "title_pt": "Como Configurar o webpack 5 do Zero",
+      "title_en": "How to Set Up webpack 5 From Scratch",
+      "description_pt": "Guia passo a passo para configurar o Webpack 5 manualmente.",
+      "description_en": "Step-by-step guide to configuring Webpack 5 manually.",
+      "icon": "⚙️",
+      "content_pt": "# Configuração do Webpack 5\n\nO Webpack ajuda a empacotar suas aplicações JavaScript. Para configurá-lo:\n\n1. Instale com npm:\n   ```bash\n   npm install webpack webpack-cli --save-dev\n   ```\n2. Crie o `webpack.config.js`:\n   ```js\n   module.exports = {\n     entry: './src/index.js',\n     output: {\n       filename: 'bundle.js',\n       path: __dirname + '/dist'\n     }\n   };\n   ```\n3. Rode `npx webpack` para construir.\n\nVeja [Webpack Guides](https://webpack.js.org/guides/).",
+      "content_en": "# Webpack 5 Setup\n\nWebpack helps bundle your JavaScript applications. To set it up:\n\n1. Install with npm:\n   ```bash\n   npm install webpack webpack-cli --save-dev\n   ```\n2. Create `webpack.config.js`:\n   ```js\n   module.exports = {\n     entry: './src/index.js',\n     output: {\n       filename: 'bundle.js',\n       path: __dirname + '/dist'\n     }\n   };\n   ```\n3. Run `npx webpack` to build.\n\nSee [Webpack Guides](https://webpack.js.org/guides/)."
+    },
+    {
+      "id": "js-event-loop",
+      "title_pt": "Event Loop, Callbacks, Promises e Async/Await em JavaScript",
+      "title_en": "The Event Loop, Callbacks, Promises, and Async/Await in JavaScript",
+      "description_pt": "Entenda os mecanismos assíncronos do JavaScript em profundidade.",
+      "description_en": "Deep dive into asynchronous JavaScript mechanisms.",
+      "icon": "🌀",
+      "content_pt": "# Event Loop & Async JavaScript\n\nJavaScript é single-threaded, mas assíncrono. Aprenda como funciona o event loop!\n\n- **Callbacks** lidam com tarefas assíncronas\n- **Promises** simplificam o encadeamento\n- **Async/Await** tornam o código assíncrono mais legível\n\nExemplo:\n```js\nasync function fetchData() {\n  const data = await fetch('/api');\n  return data.json();\n}\n```\n\n[MDN: Event Loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)",
+      "content_en": "# Event Loop & Async JavaScript\n\nJavaScript is single-threaded, but asynchronous. Learn how the event loop works!\n\n- **Callbacks** handle async tasks\n- **Promises** simplify chaining\n- **Async/Await** make async code readable\n\nExample:\n```js\nasync function fetchData() {\n  const data = await fetch('/api');\n  return data.json();\n}\n```\n\n[MDN: Event Loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)"
+    },
+    {
+      "id": "redux-react",
+      "title_pt": "Como Usar Redux e React",
+      "title_en": "How to Use Redux and React",
+      "description_pt": "Integre Redux nos seus apps React com arquitetura limpa.",
+      "description_en": "Integrate Redux in your React apps with clean architecture.",
+      "icon": "🧱",
+      "content_pt": "# Redux + React\n\nO Redux ajuda a gerenciar o estado fora dos seus componentes. Use com hooks do React:\n\n- `useSelector` para acessar o estado\n- `useDispatch` para disparar ações\n\nExemplo de código:\n```js\nconst count = useSelector(state => state.count);\nconst dispatch = useDispatch();\n```\n\nSaiba mais em [Redux Docs](https://redux.js.org/).",
+      "content_en": "# Redux + React\n\nRedux helps manage state outside your components. Use it with React hooks:\n\n- `useSelector` for state\n- `useDispatch` for actions\n\nSample code:\n```js\nconst count = useSelector(state => state.count);\nconst dispatch = useDispatch();\n```\n\nLearn more at [Redux Docs](https://redux.js.org/)."
+    },
+    {
+      "id": "mac-dev-setup",
+      "title_pt": "Como Configurar um Mac para Desenvolvimento",
+      "title_en": "How to Set up a Mac for Development",
+      "description_pt": "Ferramentas e configurações para otimizar o workflow no macOS.",
+      "description_en": "Tools and settings to optimize a dev workflow on macOS.",
+      "icon": "🍎",
+      "content_pt": "# Setup de Desenvolvimento no Mac\n\nInstale estas ferramentas:\n- Homebrew\n- iTerm2\n- VSCode\n\nPersonalize seu shell e use o [Homebrew](https://brew.sh/) para gerenciar pacotes.",
+      "content_en": "# Mac Development Setup\n\nInstall these tools:\n- Homebrew\n- iTerm2\n- VSCode\n\nCustomize your shell and use [Homebrew](https://brew.sh/) to manage packages."
+    },
+    {
+      "id": "css-guide",
+      "title_pt": "Guia Completo de CSS: Conceitos e Fundamentos",
+      "title_en": "A Complete Guide to CSS Concepts and Fundamentals",
+      "description_pt": "Domine layout, seletores e tópicos avançados de CSS.",
+      "description_en": "Master layout, selectors, and advanced CSS topics.",
+      "icon": "🎨",
+      "content_pt": "# Fundamentos de CSS\n\n- Seletores\n- Box Model\n- Flexbox/Grid\n\n```css\n.container {\n  display: flex;\n}\n```\n\nVeja [CSS Tricks](https://css-tricks.com/snippets/css/complete-guide-grid/)",
+      "content_en": "# CSS Fundamentals\n\n- Selectors\n- Box Model\n- Flexbox/Grid\n\n```css\n.container {\n  display: flex;\n}\n```\n\nSee [CSS Tricks](https://css-tricks.com/snippets/css/complete-guide-grid/)"
+    },
+    {
+      "id": "vue-js",
+      "title_pt": "Como Usar o Vue, o Framework JavaScript",
+      "title_en": "How to Use Vue, the JavaScript Framework",
+      "description_pt": "Crie interfaces interativas usando o Vue.",
+      "description_en": "Create interactive interfaces using Vue.",
+      "icon": "🖼️",
+      "content_pt": "# Conceitos Básicos do Vue\n\nVue é acessível e flexível. Experimente:\n```html\n<div id=\"app\">{{ message }}</div>\n<script>\nnew Vue({ el: '#app', data: { message: 'Hello Vue!' } })\n</script>\n```\nSaiba mais em [Vue.js](https://vuejs.org/)",
+      "content_en": "# Vue Basics\n\nVue is approachable and flexible. Try this:\n```html\n<div id=\"app\">{{ message }}</div>\n<script>\nnew Vue({ el: '#app', data: { message: 'Hello Vue!' } })\n</script>\n```\nLearn more at [Vue.js](https://vuejs.org/)"
+    },
+    {
+      "id": "self-taught-dev",
+      "title_pt": "Tudo o Que Sei como Desenvolvedor Sem Diploma",
+      "title_en": "Everything I Know as a Software Developer Without a Degree",
+      "description_pt": "Dicas e experiências de um desenvolvedor autodidata.",
+      "description_en": "Insights and experience from a self-taught developer.",
+      "icon": "📚",
+      "content_pt": "# Desenvolvedor Autodidata\n\nVocê pode aprender a programar sem um diploma em Ciência da Computação. Use:\n- Cursos online\n- Projetos open-source\n- Pratique sempre\n\nVeja [freeCodeCamp](https://freecodecamp.org/)",
+      "content_en": "# Self-Taught Developer\n\nYou can learn to code without a CS degree. Use:\n- Online courses\n- Open-source projects\n- Practice consistently\n\nSee [freeCodeCamp](https://freecodecamp.org/)"
+    },
+    {
+      "id": "react-guide",
+      "title_pt": "Como Usar o React, o Framework JavaScript",
+      "title_en": "How to Use React, the JavaScript Framework",
+      "description_pt": "Entenda o essencial do React e a arquitetura de componentes.",
+      "description_en": "Understand the core of React and component architecture.",
+      "icon": "⚛️",
+      "content_pt": "# Guia do React\n\nO React permite construir UIs com componentes.\n\n```js\nfunction App() {\n  return <h1>Olá Mundo</h1>;\n}\n```\n\nVeja [React Docs](https://react.dev/)",
+      "content_en": "# React Guide\n\nReact lets you build UI with components.\n\n```js\nfunction App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nSee [React Docs](https://react.dev/)"
+    },
+    {
+      "id": "design-for-devs",
+      "title_pt": "Design para Devs: Passos Práticos para Melhorar Seu Site",
+      "title_en": "Design for Developers: Specific Steps to Improve Your Website Design",
+      "description_pt": "Dicas práticas para melhorar a estética e usabilidade.",
+      "description_en": "Practical tips for improving aesthetics and usability.",
+      "icon": "🖌️",
+      "content_pt": "# Dicas de Design para Devs\n\n- Use espaços em branco\n- Alinhe o conteúdo\n- Limite fontes e cores\n\nVeja [A List Apart](https://alistapart.com/)",
+      "content_en": "# Design Tips for Devs\n\n- Use white space\n- Align content\n- Limit fonts and colors\n\nCheck [A List Apart](https://alistapart.com/)"
+    },
+    {
+      "id": "linux-cli",
+      "title_pt": "Como Usar o Terminal no Linux e macOS",
+      "title_en": "How to Use the Command Line in Linux and macOS",
+      "description_pt": "Comandos essenciais e workflows para produtividade no terminal.",
+      "description_en": "Essential commands and workflows for terminal productivity.",
+      "icon": "💻",
+      "content_pt": "# Fundamentos do Terminal\n\nFamiliarize-se com:\n- `ls`\n- `cd`\n- `mkdir`\n- `rm`\n\nVeja [Linux Command Handbook](https://www.freecodecamp.org/news/linux-command-line/)",
+      "content_en": "# Command Line Basics\n\nFamiliarize yourself with:\n- `ls`\n- `cd`\n- `mkdir`\n- `rm`\n\nSee [Linux Command Handbook](https://www.freecodecamp.org/news/linux-command-line/)"
+    }
+  ]
+  

@@ -1,0 +1,27 @@
+{
+  "menu_home": "Home",
+  "menu_projects": "Projects",
+  "menu_articles": "Articles",
+  "menu_areas": "Areas",
+  "search_placeholder": "Search...",
+  "no_results": "No results found.",
+  "toggle_sidebar": "Toggle sidebar",
+  "language": "Language",
+  "select_language": "Select language",
+  "footer_text": "All rights reserved.",
+
+  "sidebar_about_me": "About Me",
+  "sidebar_about_desc": "I'm Izaias, a digital solutions developer. This is my digital garden.",
+  "sidebar_stay_connected": "Stay Connected",
+  "sidebar_newsletter": "Email Newsletter",
+  "sidebar_rss": "RSS Feed",
+  "sidebar_guides": "Guides",
+  "sidebar_guide_react": "React & Power Automate",
+  "sidebar_guide_bi": "Power BI Modern",
+  "sidebar_fun": "Fun Stuff",
+  "sidebar_fun_pc": "My First PC",
+  "sidebar_fun_retro": "2024 Retrospective",
+  "sidebar_writeups": "Project Writeups",
+  "sidebar_writeup_app": "SertãoSoft App",
+  "sidebar_writeup_bi": "Interactive BI Dashboard"
+}

@@ -1,0 +1,27 @@
+{
+  "menu_home": "Início",
+  "menu_projects": "Projetos",
+  "menu_articles": "Artigos",
+  "menu_areas": "Áreas",
+  "search_placeholder": "Buscar...",
+  "no_results": "Nenhum resultado encontrado.",
+  "toggle_sidebar": "Alternar menu lateral",
+  "language": "Idioma",
+  "select_language": "Selecionar idioma",
+  "footer_text": "Todos os direitos reservados.",
+
+  "sidebar_about_me": "Sobre mim",
+  "sidebar_about_desc": "Sou Izaias, desenvolvedor de soluções digitais. Este é meu “digital garden”.",
+  "sidebar_stay_connected": "Fique conectado",
+  "sidebar_newsletter": "Newsletter por e-mail",
+  "sidebar_rss": "Feed RSS",
+  "sidebar_guides": "Guias",
+  "sidebar_guide_react": "React & Power Automate",
+  "sidebar_guide_bi": "Power BI Moderno",
+  "sidebar_fun": "Diversão",
+  "sidebar_fun_pc": "Meu primeiro PC",
+  "sidebar_fun_retro": "Retrospectiva 2024",
+  "sidebar_writeups": "Relatos de Projetos",
+  "sidebar_writeup_app": "SertãoSoft App",
+  "sidebar_writeup_bi": "Painel BI Interativo"
+}

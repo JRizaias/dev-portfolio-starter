@@ -1,4 +1,5 @@
 // src/components/ProjectCard.js
+import i18n from '../i18n.js';
 export function createProjectCard(project, onViewDetails) {
   console.log('[createProjectCard] Received project:', project, 'Keys:', Object.keys(project));
   const card = document.createElement('div');
@@ -6,7 +7,7 @@ export function createProjectCard(project, onViewDetails) {
 
   card.innerHTML = `
     <span style="font-size:0.9em;color:#888">${project.year ?? ''}</span>
-    <h3>${project.title_pt || project.title || 'Sem título'}</h3>
+    <h3>${project[`title_${i18n.language || localStorage.getItem('language') || 'pt'}`] || project.title || 'Sem título'}</h3>
     <div class="buttons">
       <button class="btn pv-details-btn" type="button">Ver detalhes</button>
       ${project.article ? `<a href="${project.article}" class="btn" target="_blank">Article</a>` : ''}

@@ -12,8 +12,12 @@ export function createProjectsSection(projects, onProjectDetails) {
   section.className = 'card projects-section';
 
   const heading = document.createElement('h2');
-  heading.textContent = 'Projetos';
+  heading.textContent = i18n.t('projects');
   section.appendChild(heading);
+  // Atualiza título ao trocar idioma
+  i18n.on('languageChanged', () => {
+    heading.textContent = i18n.t('projects');
+  });
 
   const grid = document.createElement('div');
   grid.className = 'project-grid';

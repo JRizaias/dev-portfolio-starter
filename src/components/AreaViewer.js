@@ -36,7 +36,6 @@ export function createAreaViewer(area, projects, onProjectDetails, onBack, isSea
 
   projects.forEach(p => {
     grid.appendChild(createProjectCard(p, onProjectDetails, isSearchMode));
-    grid.appendChild(createProjectCard(p, onProjectDetails));
   });
 
   section.appendChild(grid);

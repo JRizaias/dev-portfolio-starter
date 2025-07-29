@@ -15,8 +15,12 @@ export function createArticleViewer(article, onBack) {
   const backBtn = document.createElement('button');
   backBtn.className = 'back-btn';
   backBtn.type = 'button';
-  backBtn.innerHTML = i18n.t('back_btn') || '← Voltar';
+  function renderBackBtn() {
+    backBtn.innerHTML = i18n.t('back_btn');
+  }
+  renderBackBtn();
   backBtn.onclick = onBack;
+  i18n.on('languageChanged', renderBackBtn);
 
   const title = document.createElement('h2');
   function renderArticleContent() {

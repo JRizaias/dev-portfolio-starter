@@ -1,5 +1,5 @@
 // src/main.js
-import './i18n';
+import i18n from './i18n.js';
 import { createNavBar } from './components/NavBar.js';
 import { createSidebar } from './components/Sidebar.js';
 import { createFooter } from './components/Footer.js';
@@ -37,14 +37,19 @@ function createAreasSection() {
   section.className = 'card';
 
   const heading = document.createElement('h2');
-  heading.textContent = 'Áreas de Atuação';
+  function renderHeading() {
+    heading.textContent = i18n.t('areas_heading');
+  }
+  renderHeading();
   heading.style.marginBottom = '1rem';
   section.appendChild(heading);
+  i18n.on('languageChanged', renderHeading);
 
   const grid = document.createElement('div');
   grid.className = 'area-grid';
 
   const areasMap = groupProjectsByArea(projects);
+  console.log('[DEBUG] Áreas agrupadas:', Object.keys(areasMap));
   Object.entries(areasMap).forEach(([area, projs]) => {
     grid.appendChild(createAreaCard(area, projs.length, handleSelectArea));
   });
@@ -55,6 +60,7 @@ function createAreasSection() {
 
 // Callbacks de navegação SPA
 function handleSelectArea(area) {
+  console.log('[DEBUG] Área selecionada:', area);
   selectedArea = area;
   selectedProject = null;
   selectedArticle = null;
@@ -297,9 +303,17 @@ function renderMainContent() {
     }
     return;
   } else if (selectedArea && !selectedProject) {
-    // Lista de projetos da área selecionada
-    const projs = projects.filter(p => (p.areas || []).includes(selectedArea));
-    main.appendChild(createAreaViewer(selectedArea, projs, handleProjectDetails, handleBackToAreas));
+    // Lista de projetos da área selecionada (usando busca tolerante e multilíngue)
+    const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=>^`|~]/gu, '') : '';
+    // Se houver busca global, filtrar também pelo termo
+    let areaProjects = projects.filter(p =>
+      (p.areas || []).some(area => normalize(area) === normalize(selectedArea))
+    );
+    if (globalSearchQuery && globalSearchQuery.trim()) {
+      areaProjects = filterProjects(areaProjects, globalSearchQuery);
+    }
+    console.log('[DEBUG] Filtrando projetos para área:', selectedArea, '| Encontrados:', areaProjects.length, '| Todos projetos:', projects.map(p => p.areas));
+    main.appendChild(createAreaViewer(selectedArea, areaProjects, handleProjectDetails, handleBackToAreas));
   } else if (selectedProject) {
     // Detalhe do projeto selecionado
     const section = document.createElement('section');
@@ -316,7 +330,11 @@ function renderMainContent() {
     const backBtn = document.createElement('button');
     backBtn.className = 'back-btn';
     backBtn.type = 'button';
-    backBtn.innerHTML = '← Voltar';
+    function renderBackBtn() {
+      backBtn.innerHTML = i18n.t('back_btn') || '← Voltar';
+    }
+    renderBackBtn();
+    i18n.on('languageChanged', renderBackBtn);
     backBtn.onclick = selectedArea ? handleBackToProjects : handleBackToAreas;
 
     // Título do projeto

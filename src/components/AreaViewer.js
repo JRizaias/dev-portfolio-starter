@@ -1,4 +1,5 @@
 // src/components/AreaViewer.js
+import i18n from '../i18n.js';
 import { createProjectCard } from './ProjectCard.js';
 
 export function createAreaViewer(area, projects, onProjectDetails, onBack, isSearchMode = false) {
@@ -17,8 +18,13 @@ export function createAreaViewer(area, projects, onProjectDetails, onBack, isSea
     const backBtn = document.createElement('button');
     backBtn.className = 'back-btn';
     backBtn.type = 'button';
-    backBtn.innerHTML = '← Voltar';
+    function renderBackBtn() {
+      backBtn.innerHTML = i18n.t('back_btn');
+    }
+    renderBackBtn();
     backBtn.onclick = onBack;
+    // Atualiza ao trocar idioma
+    i18n.on('languageChanged', renderBackBtn);
 
     // Título da área
     const title = document.createElement('h2');

@@ -1,4 +1,6 @@
 // src/components/ArticleViewer.js
+import i18n from '../i18n.js';
+
 export function createArticleViewer(article, onBack) {
   const section = document.createElement('section');
   section.className = 'card article-viewer';
@@ -13,27 +15,33 @@ export function createArticleViewer(article, onBack) {
   const backBtn = document.createElement('button');
   backBtn.className = 'back-btn';
   backBtn.type = 'button';
-  backBtn.innerHTML = '← Voltar';
+  backBtn.innerHTML = i18n.t('back_btn') || '← Voltar';
   backBtn.onclick = onBack;
 
   const title = document.createElement('h2');
-  title.textContent = article.title_pt || article.title || 'Sem título';
+  function renderArticleContent() {
+    const lang = i18n.language || localStorage.getItem('language') || 'pt';
+    title.textContent = article[`title_${lang}`] || article.title || 'Sem título';
+    if (window.marked) {
+      markdownDiv.innerHTML = window.marked.parse(article[`content_${lang}`] || article.content || '');
+    } else {
+      markdownDiv.textContent = article[`content_${lang}`] || article.content || '';
+    }
+  }
   title.style.margin = '0';
 
   header.appendChild(backBtn);
   header.appendChild(title);
   section.appendChild(header);
 
-  // Aqui renderiza o markdown
+  // Renderiza o markdown
   const markdownDiv = document.createElement('div');
   markdownDiv.className = 'article-content';
 
-  // Garante que marked.js já está disponível globalmente
-  if (window.marked) {
-    markdownDiv.innerHTML = window.marked.parse(article.content_pt || article.content || '');
-  } else {
-    markdownDiv.textContent = article.content_pt || article.content || '';
-  }
+  renderArticleContent();
+
+  // Atualiza ao trocar idioma
+  i18n.on('languageChanged', renderArticleContent);
 
   section.appendChild(markdownDiv);
   return section;

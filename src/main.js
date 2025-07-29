@@ -1,4 +1,5 @@
 // src/main.js
+import i18n from './i18n.js';
 import { createNavBar } from './components/NavBar.js';
 import { createSidebar } from './components/Sidebar.js';
 import { createFooter } from './components/Footer.js';
@@ -36,14 +37,19 @@ function createAreasSection() {
   section.className = 'card';
 
   const heading = document.createElement('h2');
-  heading.textContent = 'Áreas de Atuação';
+  function renderHeading() {
+    heading.textContent = i18n.t('areas_heading');
+  }
+  renderHeading();
   heading.style.marginBottom = '1rem';
   section.appendChild(heading);
+  i18n.on('languageChanged', renderHeading);
 
   const grid = document.createElement('div');
   grid.className = 'area-grid';
 
   const areasMap = groupProjectsByArea(projects);
+  console.log('[DEBUG] Áreas agrupadas:', Object.keys(areasMap));
   Object.entries(areasMap).forEach(([area, projs]) => {
     grid.appendChild(createAreaCard(area, projs.length, handleSelectArea));
   });
@@ -54,6 +60,7 @@ function createAreasSection() {
 
 // Callbacks de navegação SPA
 function handleSelectArea(area) {
+  console.log('[DEBUG] Área selecionada:', area);
   selectedArea = area;
   selectedProject = null;
   selectedArticle = null;
@@ -156,35 +163,55 @@ function findRawIndex(norm, raw, idx) {
 
 function filterProjects(projects, query) {
   if (!query) return projects;
-  // Normalize and remove punctuation from both haystack and query
-  const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=>^`|~]/gu, '') : '';
-  const normQuery = normalize(query.trim());
-  if (!normQuery) return projects;
+  // Normalize and remove punctuation from both haystack and keywords
+  const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=^`|~]/gu, '') : '';
+  const keywords = query.trim().split(/\s+/).map(normalize).filter(Boolean);
+  if (!keywords.length) return projects;
   return projects.filter(p => {
     let haystack = '';
+    // Títulos
     if (p.title) haystack += ' ' + p.title;
+    if (p.title_pt) haystack += ' ' + p.title_pt;
+    if (p.title_en) haystack += ' ' + p.title_en;
+    // Descrições
     if (p.description) haystack += ' ' + p.description;
+    if (p.description_pt) haystack += ' ' + p.description_pt;
+    if (p.description_en) haystack += ' ' + p.description_en;
+    // Conteúdo
     if (p.content) haystack += ' ' + p.content;
+    if (p.content_pt) haystack += ' ' + p.content_pt;
+    if (p.content_en) haystack += ' ' + p.content_en;
+    // Outros
     if (p.tags && Array.isArray(p.tags)) haystack += ' ' + p.tags.join(' ');
     if (p.areas && Array.isArray(p.areas)) haystack += ' ' + p.areas.join(' ');
     if (p.year) haystack += ' ' + p.year;
     if (p.icon) haystack += ' ' + p.icon;
     haystack = normalize(haystack);
-    return haystack.includes(normQuery);
+    return keywords.every(kw => haystack.includes(kw));
   });
 }
 
 function filterArticles(articles, query) {
   if (!query) return articles;
   // Normalize and remove punctuation from both haystack and keywords
-  const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=>^`|~]/gu, '') : '';
+  const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=^`|~]/gu, '') : '';
   const keywords = query.trim().split(/\s+/).map(normalize).filter(Boolean);
   if (!keywords.length) return articles;
   return articles.filter(a => {
     let haystack = '';
+    // Títulos
     if (a.title) haystack += ' ' + a.title;
+    if (a.title_pt) haystack += ' ' + a.title_pt;
+    if (a.title_en) haystack += ' ' + a.title_en;
+    // Descrições
     if (a.description) haystack += ' ' + a.description;
+    if (a.description_pt) haystack += ' ' + a.description_pt;
+    if (a.description_en) haystack += ' ' + a.description_en;
+    // Conteúdo
     if (a.content) haystack += ' ' + a.content;
+    if (a.content_pt) haystack += ' ' + a.content_pt;
+    if (a.content_en) haystack += ' ' + a.content_en;
+    // Outros
     if (a.icon) haystack += ' ' + a.icon;
     if (a.tags && Array.isArray(a.tags)) haystack += ' ' + a.tags.join(' ');
     haystack = normalize(haystack);
@@ -276,9 +303,17 @@ function renderMainContent() {
     }
     return;
   } else if (selectedArea && !selectedProject) {
-    // Lista de projetos da área selecionada
-    const projs = projects.filter(p => (p.areas || []).includes(selectedArea));
-    main.appendChild(createAreaViewer(selectedArea, projs, handleProjectDetails, handleBackToAreas));
+    // Lista de projetos da área selecionada (usando busca tolerante e multilíngue)
+    const normalize = s => s ? s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[\p{P}$+<=>^`|~]/gu, '') : '';
+    // Se houver busca global, filtrar também pelo termo
+    let areaProjects = projects.filter(p =>
+      (p.areas || []).some(area => normalize(area) === normalize(selectedArea))
+    );
+    if (globalSearchQuery && globalSearchQuery.trim()) {
+      areaProjects = filterProjects(areaProjects, globalSearchQuery);
+    }
+    console.log('[DEBUG] Filtrando projetos para área:', selectedArea, '| Encontrados:', areaProjects.length, '| Todos projetos:', projects.map(p => p.areas));
+    main.appendChild(createAreaViewer(selectedArea, areaProjects, handleProjectDetails, handleBackToAreas));
   } else if (selectedProject) {
     // Detalhe do projeto selecionado
     const section = document.createElement('section');
@@ -295,7 +330,11 @@ function renderMainContent() {
     const backBtn = document.createElement('button');
     backBtn.className = 'back-btn';
     backBtn.type = 'button';
-    backBtn.innerHTML = '← Voltar';
+    function renderBackBtn() {
+      backBtn.innerHTML = i18n.t('back_btn') || '← Voltar';
+    }
+    renderBackBtn();
+    i18n.on('languageChanged', renderBackBtn);
     backBtn.onclick = selectedArea ? handleBackToProjects : handleBackToAreas;
 
     // Título do projeto

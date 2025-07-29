@@ -1,37 +1,47 @@
 [
   {
     "id": "firewall-ai",
-    "title": "Firewall Inteligente",
-    "description": "# Firewall Inteligente 🚀\n\nSolução de firewall baseada em inteligência artificial para detecção de ameaças em tempo real.\n\n## Saiba mais\n- [Notícia: Como Firewalls de IA Estão Mudando a Segurança](https://canaltech.com.br/seguranca/firewall-inteligente-mudando-seguranca-ia-234781/)\n- [Artigo na InfoSec News](https://www.infosecnews.com/firewall-ai-review)\n\n## Veja também\n- [Vídeo explicativo no YouTube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)\n\n## Imagem\n![Diagrama de arquitetura do firewall](https://placehold.co/400x150?text=Arquitetura+Firewall)\n",
+    "title_pt": "Firewall Inteligente",
+    "title_en": "Smart Firewall",
+    "description_pt": "# Firewall Inteligente 🚀\n\nSolução de firewall baseada em inteligência artificial para detecção de ameaças em tempo real.\n\n## Saiba mais\n- [Notícia: Como Firewalls de IA Estão Mudando a Segurança](https://canaltech.com.br/seguranca/firewall-inteligente-mudando-seguranca-ia-234781/)\n- [Artigo na InfoSec News](https://www.infosecnews.com/firewall-ai-review)\n\n## Veja também\n- [Vídeo explicativo no YouTube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)\n\n## Imagem\n![Diagrama de arquitetura do firewall](https://placehold.co/400x150?text=Arquitetura+Firewall)\n",
+    "description_en": "# Smart Firewall 🚀\n\nAI-powered firewall solution for real-time threat detection.\n\n## Learn more\n- [News: How AI Firewalls Are Changing Security](https://canaltech.com.br/seguranca/firewall-inteligente-mudando-seguranca-ia-234781/)\n- [Article on InfoSec News](https://www.infosecnews.com/firewall-ai-review)\n\n## See also\n- [Explainer video on YouTube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)\n\n## Image\n![Firewall architecture diagram](https://placehold.co/400x150?text=Firewall+Architecture)\n",
     "year": 2024,
-    "areas": ["Cybersegurança", "Desenvolvimento Web"]
+    "areas": ["Cybersecurity", "Web Development"]
   },
   {
     "id": "painel-vendas",
-    "title": "Painel de Dados de Vendas",
-    "description": "# Painel de Dados de Vendas\n\nDashboard em Power BI para monitorar KPIs de vendas.\n\n## Notícias relacionadas\n- [Reportagem: O impacto do BI nas vendas](https://exame.com/negocios/impacto-bi-vendas/)\n- [Blog: Melhores Dashboards de 2023](https://blog.powerbi.com/top-dashboards-2023)\n\n## Interface do dashboard\n![Dashboard Example](https://placehold.co/600x200)\n",
+    "title_pt": "Painel de Dados de Vendas",
+    "title_en": "Sales Data Dashboard",
+    "description_pt": "# Painel de Dados de Vendas\n\nDashboard em Power BI para monitorar KPIs de vendas.\n\n## Notícias relacionadas\n- [Reportagem: O impacto do BI nas vendas](https://exame.com/negocios/impacto-bi-vendas/)\n- [Blog: Melhores Dashboards de 2023](https://blog.powerbi.com/top-dashboards-2023)\n\n## Interface do dashboard\n![Dashboard Example](https://placehold.co/600x200)\n",
+    "description_en": "# Sales Data Dashboard\n\nPower BI dashboard to monitor sales KPIs.\n\n## Related news\n- [Report: The Impact of BI on Sales](https://exame.com/negocios/impacto-bi-vendas/)\n- [Blog: Top Dashboards of 2023](https://blog.powerbi.com/top-dashboards-2023)\n\n## Dashboard interface\n![Dashboard Example](https://placehold.co/600x200)\n",
     "year": 2023,
-    "areas": ["Dados", "Business Intelligence"]
+    "areas": ["Data", "Business Intelligence"]
   },
   {
     "id": "plataforma-ead",
-    "title": "Plataforma EAD Personalizada",
-    "description": "# Plataforma EAD Personalizada\n\nSistema de ensino a distância para escolas públicas.\n\n## Matéria\n- [G1: EAD em escolas públicas avança após pandemia](https://g1.globo.com/educacao/noticia/2022/07/15/ead-em-escolas-publicas-pandemia.ghtml)\n\n## Videoaula\n- [Assista à apresentação do projeto](https://www.youtube.com/watch?v=5qap5aO4i9A)\n\n## Imagem\n![Alunos usando a plataforma](https://placehold.co/500x200?text=Alunos+usando+a+plataforma)\n",
+    "title_pt": "Plataforma EAD Personalizada",
+    "title_en": "Custom E-Learning Platform",
+    "description_pt": "# Plataforma EAD Personalizada\n\nSistema de ensino a distância para escolas públicas.\n\n## Matéria\n- [G1: EAD em escolas públicas avança após pandemia](https://g1.globo.com/educacao/noticia/2022/07/15/ead-em-escolas-publicas-pandemia.ghtml)\n\n## Videoaula\n- [Assista à apresentação do projeto](https://www.youtube.com/watch?v=5qap5aO4i9A)\n\n## Imagem\n![Alunos usando a plataforma](https://placehold.co/500x200?text=Alunos+usando+a+plataforma)\n",
+    "description_en": "# Custom E-Learning Platform\n\nDistance learning system for public schools.\n\n## Article\n- [G1: Distance learning in public schools grows after the pandemic](https://g1.globo.com/educacao/noticia/2022/07/15/ead-em-escolas-publicas-pandemia.ghtml)\n\n## Video lesson\n- [Watch the project presentation](https://www.youtube.com/watch?v=5qap5aO4i9A)\n\n## Image\n![Students using the platform](https://placehold.co/500x200?text=Students+using+the+platform)\n",
     "year": 2022,
-    "areas": ["Desenvolvimento Web", "Educação"]
+    "areas": ["Web Development", "Education"]
   },
   {
     "id": "detector-fraudes",
-    "title": "Detector de Fraudes com IA",
-    "description": "# Detector de Fraudes com IA\n\nMachine Learning para identificar fraudes financeiras em tempo real.\n\n## Notícias e Artigos\n- [Exame: Inteligência Artificial contra fraudes bancárias](https://exame.com/tecnologia/ia-fraudes-bancarias/)\n- [MIT News: Machine Learning for fraud detection](https://news.mit.edu/2023/fraud-detection-machine-learning-0322)\n\n## Demonstração\n- [Veja a demo do painel](https://demo.fraudes-ia.com)\n",
+    "title_pt": "Detector de Fraudes com IA",
+    "title_en": "AI Fraud Detector",
+    "description_pt": "# Detector de Fraudes com IA\n\nMachine Learning para identificar fraudes financeiras em tempo real.\n\n## Notícias e Artigos\n- [Exame: Inteligência Artificial contra fraudes bancárias](https://exame.com/tecnologia/ia-fraudes-bancarias/)\n- [MIT News: Machine Learning for fraud detection](https://news.mit.edu/2023/fraud-detection-machine-learning-0322)\n\n## Demonstração\n- [Veja a demo do painel](https://demo.fraudes-ia.com)\n",
+    "description_en": "# AI Fraud Detector\n\nMachine learning for real-time financial fraud detection.\n\n## News & Articles\n- [Exame: Artificial Intelligence against bank fraud](https://exame.com/tecnologia/ia-fraudes-bancarias/)\n- [MIT News: Machine Learning for fraud detection](https://news.mit.edu/2023/fraud-detection-machine-learning-0322)\n\n## Demo\n- [See the dashboard demo](https://demo.fraudes-ia.com)\n",
     "year": 2024,
-    "areas": ["Cybersegurança", "Dados", "Machine Learning"]
+    "areas": ["Cybersecurity", "Data", "Machine Learning"]
   },
   {
     "id": "app-saude",
-    "title": "Aplicativo de Saúde Mental",
-    "description": "# Aplicativo de Saúde Mental\n\nApp mobile para acompanhamento psicológico remoto.\n\n## Leia mais\n- [Veja reportagem sobre o impacto do app](https://oglobo.globo.com/saude/tecnologia-aplicativos-psicologia-25513744)\n\n## Vídeo\n- [Assista a entrevista com o criador](https://www.youtube.com/watch?v=3fumBcKC6RE)\n\n## Imagem\n![App screenshot](https://placehold.co/350x700?text=App+Sa%C3%BAde)\n",
+    "title_pt": "Aplicativo de Saúde Mental",
+    "title_en": "Mental Health App",
+    "description_pt": "# Aplicativo de Saúde Mental\n\nApp mobile para acompanhamento psicológico remoto.\n\n## Leia mais\n- [Veja reportagem sobre o impacto do app](https://oglobo.globo.com/saude/tecnologia-aplicativos-psicologia-25513744)\n\n## Vídeo\n- [Assista a entrevista com o criador](https://www.youtube.com/watch?v=3fumBcKC6RE)\n\n## Imagem\n![App screenshot](https://placehold.co/350x700?text=App+Saúde)\n",
+    "description_en": "# Mental Health App\n\nMobile app for remote psychological support.\n\n## Read more\n- [See report about the app's impact](https://oglobo.globo.com/saude/tecnologia-aplicativos-psicologia-25513744)\n\n## Video\n- [Watch the interview with the creator](https://www.youtube.com/watch?v=3fumBcKC6RE)\n\n## Image\n![App screenshot](https://placehold.co/350x700?text=Health+App)\n",
     "year": 2023,
-    "areas": ["Mobile", "Saúde", "Psicologia"]
+    "areas": ["Mobile", "Health", "Psychology"]
   }
 ]

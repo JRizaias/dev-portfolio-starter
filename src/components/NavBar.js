@@ -1,4 +1,5 @@
 import { createSearchBar } from './SearchBar.js';
+import i18n from '../i18n.js';
 
 export function createNavBar(onToggleSidebar, onSearchInput) {
   const nav = document.createElement('nav');
@@ -78,12 +79,17 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   rightSection.appendChild(githubLink);
 
   // Botões de idioma
+
   const langBR = document.createElement('button');
   langBR.innerHTML = '🇧🇷';
   langBR.className = 'nav-icon';
   langBR.setAttribute('aria-label', 'Mudar para Português');
   langBR.setAttribute('title', 'Português');
   langBR.setAttribute('type', 'button');
+  langBR.onclick = () => {
+    i18n.changeLanguage('pt');
+    localStorage.setItem('language', 'pt');
+  };
   rightSection.appendChild(langBR);
 
   const langEN = document.createElement('button');
@@ -92,6 +98,10 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   langEN.setAttribute('aria-label', 'Switch to English');
   langEN.setAttribute('title', 'English');
   langEN.setAttribute('type', 'button');
+  langEN.onclick = () => {
+    i18n.changeLanguage('en');
+    localStorage.setItem('language', 'en');
+  };
   rightSection.appendChild(langEN);
 
   nav.appendChild(leftSection);

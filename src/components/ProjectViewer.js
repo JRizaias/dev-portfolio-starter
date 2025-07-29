@@ -14,34 +14,46 @@ function highlightBlocks(container) {
   }
 }
 
+import i18n from '../i18n.js';
+
 export function createProjectViewer(project, isSearchMode = false) {
   const wrapper = document.createElement('section');
   wrapper.className = 'project-viewer';
 
   if (!project) {
-    wrapper.innerHTML = `<div class="pv-empty">Selecione um projeto para ver detalhes.</div>`;
+    wrapper.innerHTML = `<div class="pv-empty">${i18n.t('select_project') || 'Selecione um projeto para ver detalhes.'}</div>`;
     return wrapper;
   }
 
-  const md = window.marked.parse(project.description ?? '', {sanitize: true});
+  const titleElem = document.createElement('h2');
+  const yearElem = document.createElement('span');
+  yearElem.className = 'pv-year';
+  const articleElem = document.createElement('article');
+  articleElem.tabIndex = 0;
 
-  if (isSearchMode) {
-    wrapper.innerHTML = `
-      <div class="pv-content">
-        <article tabindex="0">${md}</article>
-      </div>
-    `;
-  } else {
-    wrapper.innerHTML = `
-      <div class="pv-content">
-        <h2>${sanitizeHTML(project.title || '')}</h2>
-        <span class="pv-year">${sanitizeHTML(project.year || '')}</span>
-        <article tabindex="0">${md}</article>
-      </div>
-    `;
+  function renderProjectContent() {
+    const lang = i18n.language || localStorage.getItem('language') || 'pt';
+    titleElem.textContent = project[`title_${lang}`] || project.title || 'Sem título';
+    yearElem.textContent = project.year || '';
+    if (window.marked) {
+      articleElem.innerHTML = window.marked.parse(project[`description_${lang}`] || project.description || '');
+    } else {
+      articleElem.textContent = project[`description_${lang}`] || project.description || '';
+    }
+    highlightBlocks(articleElem);
   }
 
-  highlightBlocks(wrapper);
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'pv-content';
+  if (!isSearchMode) {
+    contentDiv.appendChild(titleElem);
+    contentDiv.appendChild(yearElem);
+  }
+  contentDiv.appendChild(articleElem);
+  wrapper.appendChild(contentDiv);
+
+  renderProjectContent();
+  i18n.on('languageChanged', renderProjectContent);
 
   return wrapper;
 }

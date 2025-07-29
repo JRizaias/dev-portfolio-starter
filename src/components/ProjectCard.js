@@ -6,7 +6,7 @@ export function createProjectCard(project, onViewDetails) {
 
   card.innerHTML = `
     <span style="font-size:0.9em;color:#888">${project.year ?? ''}</span>
-    <h3>${project.title}</h3>
+    <h3>${project.title_pt || project.title || 'Sem título'}</h3>
     <div class="buttons">
       <button class="btn pv-details-btn" type="button">Ver detalhes</button>
       ${project.article ? `<a href="${project.article}" class="btn" target="_blank">Article</a>` : ''}

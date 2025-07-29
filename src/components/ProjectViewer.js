@@ -23,7 +23,7 @@ export function createProjectViewer(project, isSearchMode = false) {
     return wrapper;
   }
 
-  const md = window.marked.parse(project.description ?? '', {sanitize: true});
+  const md = window.marked.parse(project.description_pt || project.description || '', {sanitize: true});
 
   if (isSearchMode) {
     wrapper.innerHTML = `
@@ -34,7 +34,7 @@ export function createProjectViewer(project, isSearchMode = false) {
   } else {
     wrapper.innerHTML = `
       <div class="pv-content">
-        <h2>${sanitizeHTML(project.title || '')}</h2>
+        <h2>${sanitizeHTML(project.title_pt || project.title || 'Sem título')}</h2>
         <span class="pv-year">${sanitizeHTML(project.year || '')}</span>
         <article tabindex="0">${md}</article>
       </div>

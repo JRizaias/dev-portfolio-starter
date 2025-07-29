@@ -14,8 +14,8 @@ export function createArticleCard(article, onArticleDetails) {
   card.innerHTML = `
     <span class="article-icon">${article.icon}</span>
     <div class="article-text">
-      <span class="article-title">${article.title}</span>
-      <p class="article-desc">${article.description}</p>
+      <span class="article-title">${article.title_pt || article.title || 'Sem título'}</span>
+      <p class="article-desc">${article.description_pt || article.description || 'Sem descrição'}</p>
     </div>
   `;
   return card;

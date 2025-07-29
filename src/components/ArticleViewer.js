@@ -17,7 +17,7 @@ export function createArticleViewer(article, onBack) {
   backBtn.onclick = onBack;
 
   const title = document.createElement('h2');
-  title.textContent = article.title;
+  title.textContent = article.title_pt || article.title || 'Sem título';
   title.style.margin = '0';
 
   header.appendChild(backBtn);
@@ -30,9 +30,9 @@ export function createArticleViewer(article, onBack) {
 
   // Garante que marked.js já está disponível globalmente
   if (window.marked) {
-    markdownDiv.innerHTML = window.marked.parse(article.content || '');
+    markdownDiv.innerHTML = window.marked.parse(article.content_pt || article.content || '');
   } else {
-    markdownDiv.textContent = article.content || '';
+    markdownDiv.textContent = article.content_pt || article.content || '';
   }
 
   section.appendChild(markdownDiv);

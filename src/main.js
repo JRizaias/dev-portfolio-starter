@@ -1,4 +1,5 @@
 // src/main.js
+import './i18n';
 import { createNavBar } from './components/NavBar.js';
 import { createSidebar } from './components/Sidebar.js';
 import { createFooter } from './components/Footer.js';

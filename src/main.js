@@ -9,6 +9,7 @@ import { createProjectViewer } from './components/ProjectViewer.js';
 import { createArticlesSection } from './components/ArticlesSection.js';
 import { createArticleViewer } from './components/ArticleViewer.js'; // NOVO
 import { createProjectsSection } from './components/ProjectsSection.js';
+import { createProjectsSkeleton } from './components/ProjectsSkeleton.js';
 import projects from './data/projects.json' assert { type: "json" };
 import articles from './data/articles.json' assert { type: "json" };
 
@@ -226,9 +227,20 @@ function filterAreas(projects, query) {
   return groupProjectsByArea(filteredProjects);
 }
 
+let isRendering = false;
+
+function fadeInMain(main) {
+  main.classList.remove('fade-in');
+  // Force reflow to restart animation
+  void main.offsetWidth;
+  main.classList.add('fade-in');
+}
+
 function renderMainContent() {
   const main = document.querySelector('.main-content');
   main.innerHTML = '';
+  isRendering = true;
+
 
   // Visualização detalhada do artigo (SPA)
   if (selectedArticle) {
@@ -242,6 +254,8 @@ function renderMainContent() {
       // Default behavior: show all areas, projects, and articles as before
       main.appendChild(createAreasSection());
       main.appendChild(createArticlesSection(articles, handleArticleDetails));
+      fadeInMain(main);
+      isRendering = false;
       return;
     }
 
@@ -253,35 +267,16 @@ function renderMainContent() {
     if (filteredProjects.length > 0 || filteredArticles.length > 0) {
       if (filteredProjects.length > 0) {
         hasResults = true;
-        if (typeof createProjectsSection === 'function') {
+        // Show skeletons before rendering real content
+        main.appendChild(createProjectsSkeleton(Math.min(filteredProjects.length, 6)));
+        fadeInMain(main);
+        setTimeout(() => {
+          main.innerHTML = '';
           main.appendChild(createProjectsSection(filteredProjects, handleProjectDetails, true)); // isSearchMode = true
-        } else {
-          const section = document.createElement('section');
-          section.className = 'card';
-          const heading = document.createElement('h2');
-          heading.textContent = 'Projetos';
-          heading.style.marginBottom = '1rem';
-          section.appendChild(heading);
-          const grid = document.createElement('div');
-          grid.className = 'area-grid';
-          filteredProjects.forEach(p => {
-            grid.appendChild(createProjectCard(p, handleProjectDetails, true)); // isSearchMode = true
-          });
-          section.appendChild(grid);
-          main.appendChild(section);
-        }
-        section.className = 'card';
-        const heading = document.createElement('h2');
-        heading.textContent = 'Projetos';
-        heading.style.marginBottom = '1rem';
-        section.appendChild(heading);
-        const grid = document.createElement('div');
-        grid.className = 'area-grid';
-        filteredProjects.forEach(p => {
-          grid.appendChild(createProjectCard(p, handleProjectDetails, true)); // isSearchMode = true
-        });
-        section.appendChild(grid);
-        main.appendChild(section);
+          fadeInMain(main);
+          isRendering = false;
+        }, 400);
+        return;
       }
     }
 
@@ -289,6 +284,7 @@ function renderMainContent() {
     if (filteredArticles.length > 0) {
       hasResults = true;
       main.appendChild(createArticlesSection(filteredArticles, handleArticleDetails));
+      fadeInMain(main);
     }
 
     if (!hasResults && query) {
@@ -300,6 +296,7 @@ function renderMainContent() {
       msg.style.textAlign = 'center';
       msg.style.color = '#888';
       main.appendChild(msg);
+      fadeInMain(main);
     }
     return;
   } else if (selectedArea && !selectedProject) {
@@ -314,6 +311,7 @@ function renderMainContent() {
     }
     console.log('[DEBUG] Filtrando projetos para área:', selectedArea, '| Encontrados:', areaProjects.length, '| Todos projetos:', projects.map(p => p.areas));
     main.appendChild(createAreaViewer(selectedArea, areaProjects, handleProjectDetails, handleBackToAreas));
+    fadeInMain(main);
   } else if (selectedProject) {
     // Detalhe do projeto selecionado
     const section = document.createElement('section');

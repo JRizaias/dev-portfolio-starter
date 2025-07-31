@@ -18,6 +18,10 @@ let selectedArea = null;
 let selectedProject = null;
 let selectedArticle = null;
 
+// Novo: estado de roteamento SPA
+let currentView = null;
+let currentSlug = null;
+
 // Agrupa projetos por área
 function groupProjectsByArea(projects) {
   const areasMap = {};
@@ -61,42 +65,34 @@ function createAreasSection() {
 
 // Callbacks de navegação SPA
 function handleSelectArea(area) {
-  console.log('[DEBUG] Área selecionada:', area);
-  selectedArea = area;
-  selectedProject = null;
-  selectedArticle = null;
-  renderMainContent();
+  // Use o nome original (slug) da área para URL
+  navigateTo('area', area);
 }
 
 function handleProjectDetails(project) {
-  selectedProject = project;
-  selectedArticle = null;
-  renderMainContent();
+  // Use o slug/id do projeto para URL
+  navigateTo('project', project.slug || project.id || project.title);
 }
 
 function handleBackToAreas() {
-  selectedArea = null;
-  selectedProject = null;
-  selectedArticle = null;
-  renderMainContent();
+  navigateTo(null, null); // Home
 }
 
 function handleBackToProjects() {
-  selectedProject = null;
-  selectedArticle = null;
-  renderMainContent();
+  if (selectedArea) {
+    navigateTo('area', selectedArea);
+  } else {
+    navigateTo(null, null);
+  }
 }
 
 function handleArticleDetails(article) {
-  selectedArticle = article;
-  selectedArea = null;
-  selectedProject = null;
-  renderMainContent();
+  // Use o slug/id do artigo para URL
+  navigateTo('article', article.slug || article.id || article.title);
 }
 
 function handleBackToArticles() {
-  selectedArticle = null;
-  renderMainContent();
+  navigateTo(null, null); // Home ou lista de artigos
 }
 
 // Renderização principal do conteúdo central da página
@@ -397,7 +393,15 @@ function handleGlobalSearchInput(query) {
   }, 200);
 }
 
-function renderPage() {
+// Novo: renderPage(view, slug)
+function renderPage(view, slug) {
+  // Atualiza estado global de navegação
+  currentView = view;
+  currentSlug = slug;
+  selectedArea = null;
+  selectedProject = null;
+  selectedArticle = null;
+
   isSidebarCollapsed = loadSidebarState();
   const layout = document.getElementById('layout');
   layout.innerHTML = '';
@@ -417,13 +421,77 @@ function renderPage() {
   contentWrapper.appendChild(main);
 
   layout.appendChild(contentWrapper);
-
-  // Footer fora do main para não sumir em renderizações SPA
   layout.appendChild(createFooter());
 
+  // Lógica de roteamento
+  if (!view) {
+    renderMainContent();
+    return;
+  }
+  if (view === 'area') {
+    // Buscar área pelo slug
+    selectedArea = slug;
+    renderMainContent();
+    return;
+  }
+  if (view === 'project') {
+    const project = projects.find(p => (p.slug || p.id || p.title) === slug);
+    if (project) {
+      selectedProject = project;
+      renderMainContent();
+      return;
+    }
+  }
+  if (view === 'article') {
+    const article = articles.find(a => (a.slug || a.id || a.title) === slug);
+    if (article) {
+      selectedArticle = article;
+      renderMainContent();
+      return;
+    }
+  }
+  // Se não encontrou, volta para home
   renderMainContent();
 }
 
+// SPA: navegação com history.pushState
+function navigateTo(view, slug) {
+  let url = '/';
+  if (view === 'area' && slug) url = `/area/${encodeURIComponent(slug)}`;
+  else if (view === 'project' && slug) url = `/project/${encodeURIComponent(slug)}`;
+  else if (view === 'article' && slug) url = `/article/${encodeURIComponent(slug)}`;
+  history.pushState({view, slug}, '', url);
+  renderPage(view, slug);
+}
+
+
+// SPA: listener para botão voltar/avançar do navegador
+window.onpopstate = function(e) {
+  if (e.state) {
+    renderPage(e.state.view, e.state.slug);
+  } else {
+    renderPage(null, null);
+  }
+};
+
+// Exporta navegação SPA para uso nos cards
+export { navigateTo };
+
+
 
 // Inicialização ao carregar DOM
-document.addEventListener('DOMContentLoaded', renderPage);
+document.addEventListener('DOMContentLoaded', () => {
+
+  // SPA: parse URL inicial
+  const path = window.location.pathname;
+  let match = path.match(/^\/(area|project|article)\/([^\/]+)$/);
+  if (match) {
+    const view = match[1];
+    const slug = decodeURIComponent(match[2]);
+    history.replaceState({view, slug}, '', path);
+    renderPage(view, slug);
+  } else {
+    history.replaceState({view: null, slug: null}, '', '/');
+    renderPage(null, null);
+  }
+});

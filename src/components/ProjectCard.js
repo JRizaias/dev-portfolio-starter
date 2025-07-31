@@ -1,5 +1,6 @@
 // src/components/ProjectCard.js
 import i18n from '../i18n.js';
+import { navigateTo } from '../main.js';
 export function createProjectCard(project, onViewDetails) {
   console.log('[createProjectCard] Received project:', project, 'Keys:', Object.keys(project));
   const card = document.createElement('div');
@@ -22,9 +23,7 @@ export function createProjectCard(project, onViewDetails) {
 
   // Clique e teclado ativam detalhes
   card.querySelector('.pv-details-btn').addEventListener('click', () => {
-    if (typeof onViewDetails === 'function') {
-      onViewDetails(project);
-    }
+    navigateTo('project', project.slug || project.id || project.title);
   });
   card.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {

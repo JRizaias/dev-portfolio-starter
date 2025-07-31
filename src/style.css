@@ -254,6 +254,29 @@ h1, h2, h3, h4 {
   margin-top: 2rem;
   padding: 0;
   list-style: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.project-grid > li {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.projects-section {
+  overflow: hidden;
+}
+
+@media (max-width: 50rem) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .project-card {
@@ -266,6 +289,9 @@ h1, h2, h3, h4 {
   flex-direction: column;
   gap: 0.5rem;
   min-height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .project-card h3 {

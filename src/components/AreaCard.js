@@ -1,4 +1,5 @@
 // src/components/AreaCard.js
+import { navigateTo } from '../main.js';
 export function createAreaCard(area, count, onSelect, isSearchMode = false) {
   const card = document.createElement('div');
   card.className = 'area-card';
@@ -14,9 +15,9 @@ export function createAreaCard(area, count, onSelect, isSearchMode = false) {
     card.tabIndex = -1;
     card.setAttribute('aria-disabled', 'true');
   } else {
-    card.addEventListener('click', () => onSelect(area));
+    card.addEventListener('click', () => navigateTo('area', area));
     card.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') onSelect(area);
+      if (e.key === 'Enter' || e.key === ' ') navigateTo('area', area);
     });
   }
   return card;

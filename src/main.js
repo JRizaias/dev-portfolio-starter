@@ -9,6 +9,7 @@ import { createProjectViewer } from './components/ProjectViewer.js';
 import { createArticlesSection } from './components/ArticlesSection.js';
 import { createArticleViewer } from './components/ArticleViewer.js'; // NOVO
 import { createProjectsSection } from './components/ProjectsSection.js';
+import { createProjectsSkeleton } from './components/ProjectsSkeleton.js';
 import projects from './data/projects.json' assert { type: "json" };
 import articles from './data/articles.json' assert { type: "json" };
 
@@ -16,6 +17,10 @@ import articles from './data/articles.json' assert { type: "json" };
 let selectedArea = null;
 let selectedProject = null;
 let selectedArticle = null;
+
+// Novo: estado de roteamento SPA
+let currentView = null;
+let currentSlug = null;
 
 // Agrupa projetos por área
 function groupProjectsByArea(projects) {
@@ -60,42 +65,34 @@ function createAreasSection() {
 
 // Callbacks de navegação SPA
 function handleSelectArea(area) {
-  console.log('[DEBUG] Área selecionada:', area);
-  selectedArea = area;
-  selectedProject = null;
-  selectedArticle = null;
-  renderMainContent();
+  // Use o nome original (slug) da área para URL
+  navigateTo('area', area);
 }
 
 function handleProjectDetails(project) {
-  selectedProject = project;
-  selectedArticle = null;
-  renderMainContent();
+  // Use o slug/id do projeto para URL
+  navigateTo('project', project.slug || project.id || project.title);
 }
 
 function handleBackToAreas() {
-  selectedArea = null;
-  selectedProject = null;
-  selectedArticle = null;
-  renderMainContent();
+  navigateTo(null, null); // Home
 }
 
 function handleBackToProjects() {
-  selectedProject = null;
-  selectedArticle = null;
-  renderMainContent();
+  if (selectedArea) {
+    navigateTo('area', selectedArea);
+  } else {
+    navigateTo(null, null);
+  }
 }
 
 function handleArticleDetails(article) {
-  selectedArticle = article;
-  selectedArea = null;
-  selectedProject = null;
-  renderMainContent();
+  // Use o slug/id do artigo para URL
+  navigateTo('article', article.slug || article.id || article.title);
 }
 
 function handleBackToArticles() {
-  selectedArticle = null;
-  renderMainContent();
+  navigateTo(null, null); // Home ou lista de artigos
 }
 
 // Renderização principal do conteúdo central da página
@@ -226,9 +223,20 @@ function filterAreas(projects, query) {
   return groupProjectsByArea(filteredProjects);
 }
 
+let isRendering = false;
+
+function fadeInMain(main) {
+  main.classList.remove('fade-in');
+  // Force reflow to restart animation
+  void main.offsetWidth;
+  main.classList.add('fade-in');
+}
+
 function renderMainContent() {
   const main = document.querySelector('.main-content');
   main.innerHTML = '';
+  isRendering = true;
+
 
   // Visualização detalhada do artigo (SPA)
   if (selectedArticle) {
@@ -242,6 +250,8 @@ function renderMainContent() {
       // Default behavior: show all areas, projects, and articles as before
       main.appendChild(createAreasSection());
       main.appendChild(createArticlesSection(articles, handleArticleDetails));
+      fadeInMain(main);
+      isRendering = false;
       return;
     }
 
@@ -253,35 +263,16 @@ function renderMainContent() {
     if (filteredProjects.length > 0 || filteredArticles.length > 0) {
       if (filteredProjects.length > 0) {
         hasResults = true;
-        if (typeof createProjectsSection === 'function') {
+        // Show skeletons before rendering real content
+        main.appendChild(createProjectsSkeleton(Math.min(filteredProjects.length, 6)));
+        fadeInMain(main);
+        setTimeout(() => {
+          main.innerHTML = '';
           main.appendChild(createProjectsSection(filteredProjects, handleProjectDetails, true)); // isSearchMode = true
-        } else {
-          const section = document.createElement('section');
-          section.className = 'card';
-          const heading = document.createElement('h2');
-          heading.textContent = 'Projetos';
-          heading.style.marginBottom = '1rem';
-          section.appendChild(heading);
-          const grid = document.createElement('div');
-          grid.className = 'area-grid';
-          filteredProjects.forEach(p => {
-            grid.appendChild(createProjectCard(p, handleProjectDetails, true)); // isSearchMode = true
-          });
-          section.appendChild(grid);
-          main.appendChild(section);
-        }
-        section.className = 'card';
-        const heading = document.createElement('h2');
-        heading.textContent = 'Projetos';
-        heading.style.marginBottom = '1rem';
-        section.appendChild(heading);
-        const grid = document.createElement('div');
-        grid.className = 'area-grid';
-        filteredProjects.forEach(p => {
-          grid.appendChild(createProjectCard(p, handleProjectDetails, true)); // isSearchMode = true
-        });
-        section.appendChild(grid);
-        main.appendChild(section);
+          fadeInMain(main);
+          isRendering = false;
+        }, 400);
+        return;
       }
     }
 
@@ -289,6 +280,7 @@ function renderMainContent() {
     if (filteredArticles.length > 0) {
       hasResults = true;
       main.appendChild(createArticlesSection(filteredArticles, handleArticleDetails));
+      fadeInMain(main);
     }
 
     if (!hasResults && query) {
@@ -300,6 +292,7 @@ function renderMainContent() {
       msg.style.textAlign = 'center';
       msg.style.color = '#888';
       main.appendChild(msg);
+      fadeInMain(main);
     }
     return;
   } else if (selectedArea && !selectedProject) {
@@ -314,6 +307,7 @@ function renderMainContent() {
     }
     console.log('[DEBUG] Filtrando projetos para área:', selectedArea, '| Encontrados:', areaProjects.length, '| Todos projetos:', projects.map(p => p.areas));
     main.appendChild(createAreaViewer(selectedArea, areaProjects, handleProjectDetails, handleBackToAreas));
+    fadeInMain(main);
   } else if (selectedProject) {
     // Detalhe do projeto selecionado
     const section = document.createElement('section');
@@ -399,7 +393,15 @@ function handleGlobalSearchInput(query) {
   }, 200);
 }
 
-function renderPage() {
+// Novo: renderPage(view, slug)
+function renderPage(view, slug) {
+  // Atualiza estado global de navegação
+  currentView = view;
+  currentSlug = slug;
+  selectedArea = null;
+  selectedProject = null;
+  selectedArticle = null;
+
   isSidebarCollapsed = loadSidebarState();
   const layout = document.getElementById('layout');
   layout.innerHTML = '';
@@ -419,13 +421,77 @@ function renderPage() {
   contentWrapper.appendChild(main);
 
   layout.appendChild(contentWrapper);
-
-  // Footer fora do main para não sumir em renderizações SPA
   layout.appendChild(createFooter());
 
+  // Lógica de roteamento
+  if (!view) {
+    renderMainContent();
+    return;
+  }
+  if (view === 'area') {
+    // Buscar área pelo slug
+    selectedArea = slug;
+    renderMainContent();
+    return;
+  }
+  if (view === 'project') {
+    const project = projects.find(p => (p.slug || p.id || p.title) === slug);
+    if (project) {
+      selectedProject = project;
+      renderMainContent();
+      return;
+    }
+  }
+  if (view === 'article') {
+    const article = articles.find(a => (a.slug || a.id || a.title) === slug);
+    if (article) {
+      selectedArticle = article;
+      renderMainContent();
+      return;
+    }
+  }
+  // Se não encontrou, volta para home
   renderMainContent();
 }
 
+// SPA: navegação com history.pushState
+function navigateTo(view, slug) {
+  let url = '/';
+  if (view === 'area' && slug) url = `/area/${encodeURIComponent(slug)}`;
+  else if (view === 'project' && slug) url = `/project/${encodeURIComponent(slug)}`;
+  else if (view === 'article' && slug) url = `/article/${encodeURIComponent(slug)}`;
+  history.pushState({view, slug}, '', url);
+  renderPage(view, slug);
+}
+
+
+// SPA: listener para botão voltar/avançar do navegador
+window.onpopstate = function(e) {
+  if (e.state) {
+    renderPage(e.state.view, e.state.slug);
+  } else {
+    renderPage(null, null);
+  }
+};
+
+// Exporta navegação SPA para uso nos cards
+export { navigateTo };
+
+
 
 // Inicialização ao carregar DOM
-document.addEventListener('DOMContentLoaded', renderPage);
+document.addEventListener('DOMContentLoaded', () => {
+
+  // SPA: parse URL inicial
+  const path = window.location.pathname;
+  let match = path.match(/^\/(area|project|article)\/([^\/]+)$/);
+  if (match) {
+    const view = match[1];
+    const slug = decodeURIComponent(match[2]);
+    history.replaceState({view, slug}, '', path);
+    renderPage(view, slug);
+  } else {
+    history.replaceState({view: null, slug: null}, '', '/');
+    renderPage(null, null);
+  }
+});

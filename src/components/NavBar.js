@@ -33,7 +33,6 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
 
   const links = [
     { href: 'index.html', icon: '<img src="src/assets/icons/icons-notes.png" alt="Notes" class="nav-img-icon" />', label: 'Notes' },
-    { href: 'blog.html', icon: '📖', label: 'Blog' },
     { href: 'projects.html', icon: '🛠️', label: 'Projects' },
     { href: 'about.html', icon: '<img src="src/assets/icons/icons-about.png" alt="About" class="nav-img-icon" />', label: 'About' }
   ];

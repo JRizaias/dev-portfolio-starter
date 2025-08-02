@@ -32,10 +32,10 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   leftSection.appendChild(searchBar);
 
   const links = [
-    { href: 'index.html', icon: '🏠', label: 'Notes' },
+    { href: 'index.html', icon: '<img src="src/assets/icons/icons-notes.png" alt="Notes" class="nav-img-icon" />', label: 'Notes' },
     { href: 'blog.html', icon: '📖', label: 'Blog' },
     { href: 'projects.html', icon: '🛠️', label: 'Projects' },
-    { href: 'about.html', icon: '👤', label: 'About' }
+    { href: 'about.html', icon: '<img src="src/assets/icons/icons-about.png" alt="About" class="nav-img-icon" />', label: 'About' }
   ];
 
   links.forEach(link => {
@@ -52,7 +52,11 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
     const iconSpan = document.createElement('span');
     iconSpan.className = 'nav-icon';
     iconSpan.setAttribute('aria-hidden', 'true');
-    iconSpan.textContent = link.icon;
+    if (link.icon.startsWith('<img')) {
+      iconSpan.innerHTML = link.icon;
+    } else {
+      iconSpan.textContent = link.icon;
+    }
 
     const labelSpan = document.createElement('span');
     labelSpan.className = 'nav-label';
@@ -70,7 +74,7 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   // Link para GitHub
   const githubLink = document.createElement('a');
   githubLink.href = 'https://github.com/JRizaias';
-  githubLink.innerHTML = '🐙';
+  githubLink.innerHTML = '<img src="src/assets/icons/icons-github.png" alt="GitHub" class="nav-img-icon" />';
   githubLink.className = 'nav-icon';
   githubLink.setAttribute('aria-label', 'GitHub');
   githubLink.setAttribute('title', 'GitHub');

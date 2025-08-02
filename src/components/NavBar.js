@@ -84,7 +84,7 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   // Botões de idioma
 
   const langBR = document.createElement('button');
-  langBR.innerHTML = '🇧🇷';
+  langBR.innerHTML = '<img src="src/assets/icons/brazil-flag.png" alt="Português" class="nav-img-icon" />';
   langBR.className = 'nav-icon';
   langBR.setAttribute('aria-label', 'Mudar para Português');
   langBR.setAttribute('title', 'Português');
@@ -96,7 +96,7 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   rightSection.appendChild(langBR);
 
   const langEN = document.createElement('button');
-  langEN.innerHTML = '🇺🇸';
+  langEN.innerHTML = '<img src="src/assets/icons/usa-flag.png" alt="English" class="nav-img-icon" />';
   langEN.className = 'nav-icon';
   langEN.setAttribute('aria-label', 'Switch to English');
   langEN.setAttribute('title', 'English');

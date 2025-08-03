@@ -32,9 +32,9 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   leftSection.appendChild(searchBar);
 
   const links = [
-    { href: 'index.html', icon: '<img src="src/assets/icons/icons-notes.png" alt="Notes" class="nav-img-icon" />', label: 'Notes' },
+    { href: 'index.html', icon: '<img src="/assets/icons/icons-notes.png" alt="Notes" class="nav-img-icon" />', label: 'Notes' },
     { href: 'projects.html', icon: '🛠️', label: 'Projects' },
-    { href: 'about.html', icon: '<img src="src/assets/icons/icons-about.png" alt="About" class="nav-img-icon" />', label: 'About' }
+    { href: 'about.html', icon: '<img src="/assets/icons/icons-about.png" alt="About" class="nav-img-icon" />', label: 'About' }
   ];
 
   links.forEach(link => {
@@ -73,7 +73,7 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   // Link para GitHub
   const githubLink = document.createElement('a');
   githubLink.href = 'https://github.com/JRizaias';
-  githubLink.innerHTML = '<img src="src/assets/icons/icons-github.png" alt="GitHub" class="nav-img-icon" />';
+  githubLink.innerHTML = '<img src="/assets/icons/icons-github.png" alt="GitHub" class="nav-img-icon" />';
   githubLink.className = 'nav-icon';
   githubLink.setAttribute('aria-label', 'GitHub');
   githubLink.setAttribute('title', 'GitHub');
@@ -84,7 +84,7 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   // Botões de idioma
 
   const langBR = document.createElement('button');
-  langBR.innerHTML = '<img src="src/assets/icons/brazil-flag.png" alt="Português" class="nav-img-icon" />';
+  langBR.innerHTML = '<img src="/assets/icons/brazil-flag.png" alt="Português" class="nav-img-icon" />';
   langBR.className = 'nav-icon';
   langBR.setAttribute('aria-label', 'Mudar para Português');
   langBR.setAttribute('title', 'Português');
@@ -96,7 +96,7 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   rightSection.appendChild(langBR);
 
   const langEN = document.createElement('button');
-  langEN.innerHTML = '<img src="src/assets/icons/usa-flag.png" alt="English" class="nav-img-icon" />';
+  langEN.innerHTML = '<img src="/assets/icons/usa-flag.png" alt="English" class="nav-img-icon" />';
   langEN.className = 'nav-icon';
   langEN.setAttribute('aria-label', 'Switch to English');
   langEN.setAttribute('title', 'English');

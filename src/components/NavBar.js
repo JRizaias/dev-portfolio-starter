@@ -1,5 +1,6 @@
 import { createSearchBar } from './SearchBar.js';
 import i18n from '../i18n.js';
+import { navigateTo } from '../main.js';
 
 export function createNavBar(onToggleSidebar, onSearchInput) {
   const nav = document.createElement('nav');
@@ -31,44 +32,69 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
   const searchBar = createSearchBar(onSearchInput);
   leftSection.appendChild(searchBar);
 
-  const links = [
-    { href: 'index.html', icon: '<img src="/assets/icons/icons-notes.png" alt="Notes" class="nav-img-icon" />', label: 'Notes' },
-    { href: 'projects.html', icon: '🛠️', label: 'Projects' },
-    { href: 'about.html', icon: '<img src="/assets/icons/icons-about.png" alt="About" class="nav-img-icon" />', label: 'About' }
+  // Navigation links usando SPA
+  const navLinks = [
+    { 
+      view: null, 
+      slug: null, 
+      icon: '<img src="/assets/icons/icons-notes.png" alt="Home" class="nav-img-icon" />', 
+      labelKey: 'menu_home' 
+    },
+    { 
+      view: 'about', 
+      slug: null, 
+      icon: '<img src="/assets/icons/icons-about.png" alt="About" class="nav-img-icon" />', 
+      labelKey: 'menu_about' 
+    }
   ];
 
-  links.forEach(link => {
-    const a = document.createElement('a');
-    a.href = link.href;
-    a.setAttribute('aria-label', link.label);
-    a.setAttribute('title', link.label);
+  navLinks.forEach(linkData => {
+    const linkBtn = document.createElement('button');
+    linkBtn.className = 'nav-link-btn';
+    linkBtn.type = 'button';
+    
+    function updateLinkLabel() {
+      linkBtn.setAttribute('aria-label', i18n.t(linkData.labelKey));
+      linkBtn.setAttribute('title', i18n.t(linkData.labelKey));
+    }
+    updateLinkLabel();
+    i18n.on('languageChanged', updateLinkLabel);
 
-    // Marcar página atual com aria-current
-    if (window.location.pathname.includes(link.href)) {
-      a.setAttribute('aria-current', 'page');
+    // Marcar página atual
+    const currentPath = window.location.pathname;
+    if ((linkData.view === null && currentPath === '/') || 
+        (linkData.view === 'about' && currentPath === '/about')) {
+      linkBtn.setAttribute('aria-current', 'page');
+      linkBtn.classList.add('active');
     }
 
     const iconSpan = document.createElement('span');
     iconSpan.className = 'nav-icon';
     iconSpan.setAttribute('aria-hidden', 'true');
-    if (link.icon.startsWith('<img')) {
-      iconSpan.innerHTML = link.icon;
-    } else {
-      iconSpan.textContent = link.icon;
-    }
+    iconSpan.innerHTML = linkData.icon;
 
     const labelSpan = document.createElement('span');
     labelSpan.className = 'nav-label';
-    labelSpan.textContent = link.label;
+    
+    function updateLabel() {
+      labelSpan.textContent = i18n.t(linkData.labelKey);
+    }
+    updateLabel();
+    i18n.on('languageChanged', updateLabel);
 
-    a.appendChild(iconSpan);
-    a.appendChild(labelSpan);
-    leftSection.appendChild(a);
+    linkBtn.appendChild(iconSpan);
+    linkBtn.appendChild(labelSpan);
+
+    // Event listener para navegação SPA
+    linkBtn.addEventListener('click', () => {
+      navigateTo(linkData.view, linkData.slug);
+    });
+
+    leftSection.appendChild(linkBtn);
   });
 
   const rightSection = document.createElement('div');
   rightSection.className = 'nav-right';
-
 
   // Link para GitHub
   const githubLink = document.createElement('a');

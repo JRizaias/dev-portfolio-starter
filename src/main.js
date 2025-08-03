@@ -9,9 +9,11 @@ import { createProjectViewer } from './components/ProjectViewer.js';
 import { createArticlesSection } from './components/ArticlesSection.js';
 import { createArticleViewer } from './components/ArticleViewer.js'; // NOVO
 import { createProjectsSection } from './components/ProjectsSection.js';
+import { createAbout } from './components/About.js';
 import { createProjectsSkeleton } from './components/ProjectsSkeleton.js';
 import projects from './data/projects.json' assert { type: "json" };
 import articles from './data/articles.json' assert { type: "json" };
+import './components/About.css';
 
 // Estado global simples para navegação SPA
 let selectedArea = null;
@@ -450,6 +452,10 @@ function renderPage(view, slug) {
       return;
     }
   }
+  if (view === 'about') {
+    main.appendChild(createAbout());
+    return;
+  }
   // Se não encontrou, volta para home
   renderMainContent();
 }
@@ -460,6 +466,7 @@ function navigateTo(view, slug) {
   if (view === 'area' && slug) url = `/area/${encodeURIComponent(slug)}`;
   else if (view === 'project' && slug) url = `/project/${encodeURIComponent(slug)}`;
   else if (view === 'article' && slug) url = `/article/${encodeURIComponent(slug)}`;
+  else if (view === 'about') url = '/about';
   history.pushState({view, slug}, '', url);
   renderPage(view, slug);
 }
@@ -484,6 +491,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // SPA: parse URL inicial
   const path = window.location.pathname;
+  
+  // Primeiro verifica se é a rota /about (sem slug)
+  if (path === '/about') {
+    history.replaceState({view: 'about', slug: null}, '', path);
+    renderPage('about', null);
+    return;
+  }
+  
+  // Depois verifica rotas com slug
   let match = path.match(/^\/(area|project|article)\/([^\/]+)$/);
   if (match) {
     const view = match[1];

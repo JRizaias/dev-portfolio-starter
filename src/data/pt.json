@@ -3,6 +3,7 @@
   "menu_projects": "Projetos",
   "menu_articles": "Artigos",
   "menu_areas": "Áreas",
+  "menu_about": "Sobre",
   "search_placeholder": "Buscar...",
   "no_results": "Nenhum resultado encontrado.",
   "toggle_sidebar": "Alternar menu lateral",
@@ -25,5 +26,15 @@
   "sidebar_writeup_app": "SertãoSoft App",
   "sidebar_writeup_bi": "Painel BI Interativo",
   "areas_heading": "Áreas de Atuação",
-  "back_btn": "← Voltar"
+  "back_btn": "← Voltar",
+
+  "about_main_heading": "Sobre Mim",
+  "about_intro_p1": "Olá! Sou uma desenvolvedora apaixonada por tecnologia e inovação, com experiência em criar soluções digitais que fazem a diferença. Minha jornada profissional começou há alguns anos e desde então tenho me dedicado a aprender e aplicar as melhores práticas de desenvolvimento.",
+  "about_intro_p2": "Quando não estou codando, gosto de explorar novas tecnologias, ler sobre tendências do mercado e contribuir com a comunidade de desenvolvedores. Acredito que a tecnologia deve ser acessível e útil para todos.",
+  "about_intro_p3": "Nos meus momentos livres, adoro viajar, fotografar paisagens naturais e praticar esportes ao ar livre. Essas atividades me inspiram e trazem novas perspectivas para meus projetos profissionais.",
+  "about_contact_heading": "Contato",
+  "about_contact_invite": "Vamos conversar! Entre em contato através de qualquer uma das opções abaixo:",
+  "about_contact_email": "E-mail",
+  "about_contact_github": "GitHub",
+  "about_contact_services": "Produtos e Serviços"
 }

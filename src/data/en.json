@@ -3,6 +3,7 @@
   "menu_projects": "Projects",
   "menu_articles": "Articles",
   "menu_areas": "Areas",
+  "menu_about": "About",
   "search_placeholder": "Search...",
   "no_results": "No results found.",
   "toggle_sidebar": "Toggle sidebar",
@@ -25,5 +26,15 @@
   "sidebar_writeup_app": "SertãoSoft App",
   "sidebar_writeup_bi": "Interactive BI Dashboard",
   "areas_heading": "Practice Areas",
-  "back_btn": "← Back"
+  "back_btn": "← Back",
+
+  "about_main_heading": "About Me",
+  "about_intro_p1": "Hello! I'm a developer passionate about technology and innovation, with experience in creating digital solutions that make a difference. My professional journey started a few years ago and since then I've been dedicated to learning and applying the best development practices.",
+  "about_intro_p2": "When I'm not coding, I enjoy exploring new technologies, reading about market trends and contributing to the developer community. I believe technology should be accessible and useful for everyone.",
+  "about_intro_p3": "In my free time, I love traveling, photographing natural landscapes and practicing outdoor sports. These activities inspire me and bring new perspectives to my professional projects.",
+  "about_contact_heading": "Contact",
+  "about_contact_invite": "Let's talk! Get in touch through any of the options below:",
+  "about_contact_email": "Email",
+  "about_contact_github": "GitHub",
+  "about_contact_services": "Products & Services"
 }

@@ -1,0 +1,16 @@
+.nav-img-icon {
+  max-width: 1.6em;
+  max-height: 1.6em;
+  vertical-align: middle;
+  height: auto;
+  width: auto;
+  display: inline-block;
+}
+
+/* Responsividade para ícones menores em telas pequenas */
+@media (max-width: 600px) {
+  .nav-img-icon {
+    max-width: 1.2em;
+    max-height: 1.2em;
+  }
+}

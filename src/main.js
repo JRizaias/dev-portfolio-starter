@@ -49,10 +49,7 @@ function createAreasSection() {
   }
   renderHeading();
   heading.style.marginBottom = '1rem';
-  section.appendChild(heading);
-  i18n.on('languageChanged', renderHeading);
-
-  const grid = document.createElement('div');
+  section.appendChild(heading);const grid = document.createElement('div');
   grid.className = 'area-grid';
 
   const areasMap = groupProjectsByArea(projects);
@@ -329,9 +326,7 @@ function renderMainContent() {
     function renderBackBtn() {
       backBtn.innerHTML = i18n.t('back_btn') || '← Voltar';
     }
-    renderBackBtn();
-    i18n.on('languageChanged', renderBackBtn);
-    backBtn.onclick = selectedArea ? handleBackToProjects : handleBackToAreas;
+    renderBackBtn();backBtn.onclick = selectedArea ? handleBackToProjects : handleBackToAreas;
 
     // Título do projeto
     const title = document.createElement('h2');
@@ -459,6 +454,11 @@ function renderPage(view, slug) {
   // Se não encontrou, volta para home
   renderMainContent();
 }
+
+// Listener global para troca de idioma (i18n)
+i18n.on('languageChanged', () => {
+  renderPage(currentView, currentSlug);
+});
 
 // SPA: navegação com history.pushState
 function navigateTo(view, slug) {

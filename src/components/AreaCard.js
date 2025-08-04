@@ -1,4 +1,5 @@
 // src/components/AreaCard.js
+import i18n from '../i18n.js';
 import { navigateTo } from '../main.js';
 export function createAreaCard(area, count, onSelect, isSearchMode = false) {
   const card = document.createElement('div');
@@ -7,7 +8,7 @@ export function createAreaCard(area, count, onSelect, isSearchMode = false) {
   card.setAttribute('role', 'button');
   card.setAttribute('aria-label', `${area} (${count} projetos)`);
   card.innerHTML = `
-    <h3>${area}</h3>
+    <h3>${i18n.t('area_' + area)}</h3>
     <span class="area-count">${count} projeto${count > 1 ? 's' : ''}</span>
   `;
   if (isSearchMode) {

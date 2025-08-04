@@ -23,12 +23,15 @@ export function createAreaViewer(area, projects, onProjectDetails, onBack, isSea
     }
     renderBackBtn();
     backBtn.onclick = onBack;
-    // Atualiza ao trocar idioma
-    i18n.on('languageChanged', renderBackBtn);
+    // Não adiciona listener de idioma aqui. O componente deve ser recriado pelo fluxo central.
 
     // Título da área
     const title = document.createElement('h2');
-    title.textContent = area;
+    function renderTitle() {
+      title.textContent = i18n.t('area_' + area);
+    }
+    renderTitle();
+    // Não adiciona listener de idioma aqui. O componente deve ser recriado pelo fluxo central.
     title.style.margin = '0';
 
     header.appendChild(backBtn);

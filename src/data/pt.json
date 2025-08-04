@@ -36,5 +36,15 @@
   "about_contact_invite": "Vamos conversar! Entre em contato através de qualquer uma das opções abaixo:",
   "about_contact_email": "E-mail",
   "about_contact_github": "GitHub",
-  "about_contact_services": "Produtos e Serviços"
+  "about_contact_services": "Produtos e Serviços",
+
+  "area_Cybersecurity": "Cibersegurança",
+  "area_Web Development": "Desenvolvimento Web",
+  "area_Data": "Dados",
+  "area_Business Intelligence": "Inteligência de Negócios",
+  "area_Machine Learning": "Aprendizado de Máquina",
+  "area_Education": "Educação",
+  "area_Mobile": "Aplicativos Mobile",
+  "area_Health": "Saúde",
+  "area_Psychology": "Psicologia"
 }

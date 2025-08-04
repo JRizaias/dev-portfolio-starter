@@ -36,5 +36,15 @@
   "about_contact_invite": "Let's talk! Get in touch through any of the options below:",
   "about_contact_email": "Email",
   "about_contact_github": "GitHub",
-  "about_contact_services": "Products & Services"
+  "about_contact_services": "Products & Services",
+
+  "area_Cybersecurity": "Cybersecurity",
+  "area_Web Development": "Web Development",
+  "area_Data": "Data",
+  "area_Business Intelligence": "Business Intelligence",
+  "area_Machine Learning": "Machine Learning",
+  "area_Education": "Education",
+  "area_Mobile": "Mobile Apps",
+  "area_Health": "Health",
+  "area_Psychology": "Psychology"
 }

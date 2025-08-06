@@ -26,6 +26,10 @@
   "sidebar_writeup_app": "SertãoSoft App",
   "sidebar_writeup_bi": "Interactive BI Dashboard",
   "areas_heading": "Practice Areas",
+  "tab_home": "Izaias's website",
+  "tab_projects": "Projects",
+  "tab_articles": "Articles",
+  "tab_about": "About",
   "back_btn": "← Back",
 
   "about_main_heading": "About Me",
@@ -46,5 +50,6 @@
   "area_Education": "Education",
   "area_Mobile": "Mobile Apps",
   "area_Health": "Health",
-  "area_Psychology": "Psychology"
+  "area_Psychology": "Psychology",
+  "details_btn": "View details"
 }

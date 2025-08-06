@@ -20,7 +20,7 @@ export function createSearchBar(onInput, options = {}) {
   wrapper.className = 'search-bar-wrapper';
 
   const input = document.createElement('input');
-  input.type = 'search';
+  input.type = 'text';
   input.id = id;
   input.className = className;
   input.placeholder = placeholder;

@@ -62,13 +62,6 @@ export function createSidebar() {
         <h2>${i18n.t('sidebar_about_me')}</h2>
         <p>${i18n.t('sidebar_about_desc')}</p>
       </section>
-      <section>
-        <h3>${i18n.t('sidebar_stay_connected')}</h3>
-        <ul>
-          <li><a href="mailto:izaias@sertaosoft.com">✉️ ${i18n.t('sidebar_newsletter')}</a></li>
-          <li><a href="/rss.xml">📰 ${i18n.t('sidebar_rss')}</a></li>
-        </ul>
-      </section>
       ${renderSection(i18n.t('sidebar_guides'), guideItems, currentLang)}
       ${renderSection(i18n.t('sidebar_fun'), funItems, currentLang)}
       ${renderSection(i18n.t('sidebar_writeups'), writeupItems, currentLang)}

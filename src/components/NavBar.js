@@ -98,7 +98,7 @@ export function createNavBar(onToggleSidebar, onSearchInput) {
 
   // Link para GitHub
   const githubLink = document.createElement('a');
-  githubLink.href = 'https://github.com/JRizaias';
+  githubLink.href = 'https://github.com';
   githubLink.innerHTML = '<img src="/assets/icons/icons-github.png" alt="GitHub" class="nav-img-icon" />';
   githubLink.className = 'nav-icon';
   githubLink.setAttribute('aria-label', 'GitHub');

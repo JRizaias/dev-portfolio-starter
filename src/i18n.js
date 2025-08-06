@@ -8,6 +8,7 @@ const resources = {
   en: { translation: en },
 };
 
+// Initialize i18n with language detection and resources
 i18n
   .use(LanguageDetector)
   .init({

@@ -237,14 +237,14 @@ function renderMainContent() {
   isRendering = true;
 
 
-  // Visualização detalhada do artigo (SPA)
+  // Detailed article view (SPA)
   if (selectedArticle) {
     main.appendChild(createArticleViewer(selectedArticle, handleBackToArticles));
     return;
   }
-  // Corrige atualização do título da aba ao trocar idioma na lista de artigos
+  // Fix tab title update when switching language in the articles list
   if (currentView === 'article' && !selectedArticle) {
-    document.title = `${i18n.t('tab_articles') || 'Artigos'} | Izaias's website`;
+    document.title = `${i18n.t('tab_articles') || 'Artigos'} | John's  website`;
   }
 
   if (!selectedArea && !selectedProject) {
@@ -342,13 +342,13 @@ function renderMainContent() {
     header.appendChild(title);
     section.appendChild(header);
 
-    // Conteúdo do projeto
+    // Project content
     section.appendChild(createProjectViewer(selectedProject));
     main.appendChild(section);
   }
 }
 
-// Renderização de toda a página (navbar, sidebar, main, footer)
+// Rendering the entire page (navbar, sidebar, main, footer)
 // Sidebar state management
 let isSidebarCollapsed = false;
 
@@ -394,17 +394,17 @@ function handleGlobalSearchInput(query) {
   }, 200);
 }
 
-// Novo: renderPage(view, slug)
+// New: renderPage(view, slug)
 function renderPage(view, slug) {
-  // Atualiza o título da aba conforme a navegação
-  let title = i18n.t('tab_home') || "Izaias's website";
-  if (view === 'project') title = `${i18n.t('tab_projects') || 'Projects'} | Izaias's website`;
-  else if (view === 'article') title = `${i18n.t('tab_articles') || 'Artigos'} | Izaias's website`;
-  else if (view === 'about') title = `${i18n.t('tab_about') || 'About'} | Izaias's website`;
+  // Update tab title according to navigation
+  let title = i18n.t('tab_home') || "John's  website";
+  if (view === 'project') title = `${i18n.t('tab_projects') || 'Projects'} | John's  website`;
+  else if (view === 'article') title = `${i18n.t('tab_articles') || 'Artigos'} | John's  website`;
+  else if (view === 'about') title = `${i18n.t('tab_about') || 'About'} | John's  website`;
   else if (view === 'area' && slug) {
-    // Tenta traduzir a área, senão usa o slug capitalizado
+    // Try to translate the area, otherwise use the capitalized slug
     let areaName = i18n.exists && i18n.exists('area_' + slug) ? i18n.t('area_' + slug) : (slug.charAt(0).toUpperCase() + slug.slice(1));
-    title = `${areaName} | Izaias's website`;
+    title = `${areaName} | John's  website`;
   }
   document.title = title;
 

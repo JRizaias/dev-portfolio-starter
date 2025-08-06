@@ -15,20 +15,27 @@ export function createProjectCard(project, onViewDetails) {
     <span style="font-size:0.9em;color:#888">${project.year ?? ''}</span>
     <h3>${title}</h3>
     <div class="buttons">
-      <button class="btn pv-details-btn" type="button">Ver detalhes</button>
+      <button class="btn pv-details-btn" type="button"></button>
       ${project.article ? `<a href="${project.article}" class="btn" target="_blank" rel="noopener noreferrer">Article</a>` : ''}
       ${project.demo ? `<a href="${project.demo}" class="btn" target="_blank" rel="noopener noreferrer">Demo</a>` : ''}
     </div>
   `;
 
+  // Renderização dinâmica do texto do botão
+  const detailsBtn = card.querySelector('.pv-details-btn');
+  function renderButtonText() {
+    detailsBtn.textContent = i18n.t('details_btn');
+  }
+  renderButtonText();
+  i18n.on('languageChanged', renderButtonText);
+
   // Clique e teclado ativam detalhes
-  card.querySelector('.pv-details-btn').addEventListener('click', () => {
+  detailsBtn.addEventListener('click', () => {
     navigateTo('project', project.slug || project.id || project.title);
   });
   card.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      const btn = card.querySelector('.pv-details-btn');
-      if (btn) btn.click();
+      if (detailsBtn) detailsBtn.click();
     }
   });
 

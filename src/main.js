@@ -242,6 +242,10 @@ function renderMainContent() {
     main.appendChild(createArticleViewer(selectedArticle, handleBackToArticles));
     return;
   }
+  // Corrige atualização do título da aba ao trocar idioma na lista de artigos
+  if (currentView === 'article' && !selectedArticle) {
+    document.title = `${i18n.t('tab_articles') || 'Artigos'} | Izaias's website`;
+  }
 
   if (!selectedArea && !selectedProject) {
     const query = globalSearchQuery && globalSearchQuery.trim();
@@ -392,6 +396,18 @@ function handleGlobalSearchInput(query) {
 
 // Novo: renderPage(view, slug)
 function renderPage(view, slug) {
+  // Atualiza o título da aba conforme a navegação
+  let title = i18n.t('tab_home') || "Izaias's website";
+  if (view === 'project') title = `${i18n.t('tab_projects') || 'Projects'} | Izaias's website`;
+  else if (view === 'article') title = `${i18n.t('tab_articles') || 'Artigos'} | Izaias's website`;
+  else if (view === 'about') title = `${i18n.t('tab_about') || 'About'} | Izaias's website`;
+  else if (view === 'area' && slug) {
+    // Tenta traduzir a área, senão usa o slug capitalizado
+    let areaName = i18n.exists && i18n.exists('area_' + slug) ? i18n.t('area_' + slug) : (slug.charAt(0).toUpperCase() + slug.slice(1));
+    title = `${areaName} | Izaias's website`;
+  }
+  document.title = title;
+
   // Atualiza estado global de navegação
   currentView = view;
   currentSlug = slug;
